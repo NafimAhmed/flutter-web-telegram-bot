@@ -1,6 +1,8 @@
 
 
 
+
+
 // To parse this JSON data, do
 //
 //     final issueModel = issueModelFromJson(jsonString);
@@ -46,19 +48,35 @@ class IssueModel {
 class Result {
   double? amount;
   double? rate;
+  String? operatorName;
+  String? operatorId;
+  String? chatId;
+  DateTime? time;
 
   Result({
     this.amount,
     this.rate,
+    this.operatorName,
+    this.operatorId,
+    this.chatId,
+    this.time,
   });
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
     amount: json["amount"],
     rate: json["rate"],
+    operatorName: json["operator_Name"],
+    operatorId: json["operatorID"],
+    chatId: json["chatID"],
+    time: DateTime.parse(json["time"]),
   );
 
   Map<String, dynamic> toJson() => {
     "amount": amount,
     "rate": rate,
+    "operator_Name": operatorName,
+    "operatorID": operatorId,
+    "chatID": chatId,
+    "time": time?.toIso8601String(),
   };
 }

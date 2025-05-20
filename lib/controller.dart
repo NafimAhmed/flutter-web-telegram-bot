@@ -16,6 +16,7 @@ class HomeController extends GetxController{
   Rx<IssueModel> issueModel=IssueModel().obs;
   Rx<SummeryModel> summeryModel=SummeryModel().obs;
   RxBool respondentTotalCategoryIsExpanded=false.obs;
+  RxDouble conversion=0.00.obs;
 
 
 
@@ -27,7 +28,7 @@ class HomeController extends GetxController{
 
   Future<void> transectionData() async {
 
-    const apiUrl = 'http://172.16.16.30:5000/api/transactions';
+    const apiUrl = 'http://172.16.16.62:5000/api/transactions';
     final uri = Uri.parse(apiUrl);
 
 
@@ -65,7 +66,7 @@ class HomeController extends GetxController{
 
   Future<void> transectionSummeryData() async {
 
-    const apiUrl = 'http://172.16.16.30:5000/api/summary';
+    const apiUrl = 'http://172.16.16.62:5000/api/summary';
     final uri = Uri.parse(apiUrl);
 
 
@@ -86,6 +87,16 @@ class HomeController extends GetxController{
 
       summeryModel.value=summeryModelFromJson(response.body);
 
+
+      // if(summeryModel.value.results?.exchangeRate!=null){
+
+          // double conversionRate=summeryModel.value.results?.exchangeRate??1;
+          //
+          // conversion.value=summeryModel.value.results?.totalTransactions??0/conversionRate;
+
+        // }
+
+
     }
 
 
@@ -95,7 +106,7 @@ class HomeController extends GetxController{
 
   Future<void> issueData() async {
 
-    const apiUrl = 'http://172.16.16.30:5000/api/issued';
+    const apiUrl = 'http://172.16.16.62:5000/api/issued';
     final uri = Uri.parse(apiUrl);
 
 

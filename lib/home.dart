@@ -90,73 +90,125 @@ class Home extends StatelessWidget {
 
             SizedBox(height: 10,),
 
+        Obx(()=>controller.transectionModel.value.results!=null?
+            Table(
+              border: TableBorder.all(), // Adds borders to cells
+              columnWidths: const {
+                0: FlexColumnWidth(), // First column width
+                1: FlexColumnWidth(),    // Second column (flexible)
+                2: FlexColumnWidth(), // Third column width
+              },
+              children: [
+                TableRow(
+                  decoration: BoxDecoration(color: Colors.grey[200]),
+                  children: [
+                    TableCell(child: Text('time', textAlign: TextAlign.center)),
+                    TableCell(child: Text('Amount', textAlign: TextAlign.center)),
+                    TableCell(child: Text('Reply	', textAlign: TextAlign.center)),
+                    TableCell(child: Text('Operator	', textAlign: TextAlign.center)),
+                  ],
+                ),
 
-            Container(
-              width: Get.width/1.5,
-              margin: EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(width: 1,color: Colors.grey)
-              ),
-              child: Obx(()=>controller.transectionModel.value.results!=null?
-              Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-
-                    Text('Time'),
-                    Container(
-                      padding: EdgeInsets.only(left: 100),
-                        child: Text('Amount')),
-                    Text('Reply'),
-                    Text('Operator'),
-
-
-                  ],),
-
-
-                  ListView.builder(
-                    shrinkWrap: true,
-                      itemCount: controller.transectionModel.value.results?.length,
-                      itemBuilder: (context,index){
-
-                        double rat=controller.transectionModel.value.results?[index].rate??0;
-
-                        double amout=controller.transectionModel.value.results?[index].amount??0;
-
-                    return Container(
-                        decoration: BoxDecoration(
-
-                          border: Border(
-                            top: BorderSide(
-                              color: Colors.black,
-                              width: 1.0,
-                              style: BorderStyle.solid, // Can be .solid, .dashed, etc.
-                            ),
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              DateFormat('yyyy-MM-dd HH:mm:ss').format(
-                                DateTime.parse("${controller.issueModel.value.timestamp}"),
-                              ),
-                            ),
-                            Text('${controller.transectionModel.value.results?[index].amount}/${controller.transectionModel.value.results?[index].rate} = ${(amout/rat).toStringAsFixed(2)}'),
-                            Text('          '),
-                            Text('Nafim Ahmed'),
-                          ],
+                for(int index=0;index<controller.transectionModel.value.results!.length;index++)
+                TableRow(
+                  children: [
+                    TableCell(child: Obx(()=>Text('${
+                        DateFormat('yyyy-MM-dd HH:mm:ss').format(
+                          DateTime.parse("${controller.transectionModel.value.results?[index].time}"),
                         )
+                      }',textAlign: TextAlign.center))),
+                    TableCell(child:
+                    Obx((){
 
-                    );
+                      double rat=controller.transectionModel.value.results?[index].rate??0;
 
-                  }),
-                ],
-              )
-                  :Text('No data'),),
-            ),
+                      double amout=controller.transectionModel.value.results?[index].amount??1;
+
+                        return Text('${controller.transectionModel.value.results?[index].amount}/${controller.transectionModel.value.results?[index].rate} = ${(amout/rat).toStringAsFixed(2)}',textAlign: TextAlign.center);}
+                    )),
+                    TableCell(child: Obx(()=>Text('${(controller.summeryModel.value.results?.totalTransactionsCripto)?.toStringAsFixed(2)}',textAlign: TextAlign.center))),
+                    TableCell(child: Obx(()=>Text('${controller.transectionModel.value.results?[index].operatorName}',textAlign: TextAlign.center))),
+                  ],
+                ),
+                // TableRow(
+                //   children: [
+                //     TableCell(child: Text('Row 2 Col 1')),
+                //     TableCell(child: Text('Row 2 Col 2')),
+                //     TableCell(child: Text('Row 2 Col 3')),
+                //   ],
+                // ),
+              ],
+            ):Text('No data found')),
+
+
+
+
+            // Container(
+            //   width: Get.width/1.5,
+            //   margin: EdgeInsets.symmetric(horizontal: 10),
+            //   decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.circular(15),
+            //       border: Border.all(width: 1,color: Colors.grey)
+            //   ),
+            //   child: Obx(()=>controller.transectionModel.value.results!=null?
+            //   Column(
+            //     children: [
+            //       Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //         children: [
+            //
+            //         Text('Time'),
+            //         Container(
+            //           padding: EdgeInsets.only(left: 100),
+            //             child: Text('Amount')),
+            //         Text('Reply'),
+            //         Text('Operator'),
+            //
+            //
+            //       ],),
+            //
+            //
+            //       ListView.builder(
+            //         shrinkWrap: true,
+            //           itemCount: controller.transectionModel.value.results?.length,
+            //           itemBuilder: (context,index){
+            //
+            //             double rat=controller.transectionModel.value.results?[index].rate??0;
+            //
+            //             double amout=controller.transectionModel.value.results?[index].amount??0;
+            //
+            //         return Container(
+            //             decoration: BoxDecoration(
+            //
+            //               border: Border(
+            //                 top: BorderSide(
+            //                   color: Colors.black,
+            //                   width: 1.0,
+            //                   style: BorderStyle.solid, // Can be .solid, .dashed, etc.
+            //                 ),
+            //               ),
+            //             ),
+            //             child: Row(
+            //               mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //               children: [
+            //                 Text(
+            //                   DateFormat('yyyy-MM-dd HH:mm:ss').format(
+            //                     DateTime.parse("${controller.issueModel.value.timestamp}"),
+            //                   ),
+            //                 ),
+            //                 Text('${controller.transectionModel.value.results?[index].amount}/${controller.transectionModel.value.results?[index].rate} = ${(amout/rat).toStringAsFixed(2)}'),
+            //                 Text('          '),
+            //                 Text('Nafim Ahmed'),
+            //               ],
+            //             )
+            //
+            //         );
+            //
+            //       }),
+            //     ],
+            //   )
+            //       :Text('No data'),),
+            // ),
 
 
             SizedBox(height: 20,),
@@ -167,78 +219,131 @@ class Home extends StatelessWidget {
             SizedBox(height: 10,),
 
 
-            Container(
+            Obx(()=>controller.issueModel.value.results!=null?
+            Table(
+              border: TableBorder.all(), // Adds borders to cells
+              columnWidths: const {
+                0: FlexColumnWidth(), // First column width
+                1: FlexColumnWidth(),    // Second column (flexible)
+                2: FlexColumnWidth(), // Third column width
+              },
+              children: [
+                TableRow(
+                  decoration: BoxDecoration(color: Colors.grey[200]),
+                  children: [
+                    TableCell(child: Text('time', textAlign: TextAlign.center)),
+                    TableCell(child: Text('Amount', textAlign: TextAlign.center)),
+                    TableCell(child: Text('Reply	', textAlign: TextAlign.center)),
+                    TableCell(child: Text('Operator	', textAlign: TextAlign.center)),
+                  ],
+                ),
 
-              width: Get.width/1.5,
-              margin: EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(width: 1,color: Colors.grey)
-              ),
-
-              child: Column(
-                children: [
-
-
-                  Obx(()=>controller.issueModel.value.results!=null?
-                  Column(
+                for(int index=0;index<controller.issueModel.value.results!.length;index++)
+                  TableRow(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text('Time'),
-                          Container(
-                            padding: EdgeInsets.only(left: 80),
-                              child: Text('Amount')),
-                          Text('Reply'),
-                          Text('Operator'),
+                      TableCell(child: Obx(()=>Text('${
+                          DateFormat('yyyy-MM-dd HH:mm:ss').format(
+                            DateTime.parse("${controller.issueModel.value.results?[index].time}"),
+                          )
+                      }',textAlign: TextAlign.center))),
+                      TableCell(child:
+                      Obx((){
 
+                        double rat=controller.issueModel.value.results?[index].rate??0;
 
-                        ],),
-                      ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: controller.issueModel.value.results?.length,
-                          itemBuilder: (context,index){
+                        double amout=controller.issueModel.value.results?[index].amount??1;
 
-                            double rat=controller.issueModel.value.results?[index].rate??0;
-
-                            double amout=controller.issueModel.value.results?[index].amount??0;
-
-
-                            return Container(
-                                decoration: BoxDecoration(
-
-                                  border: Border(
-                                    top: BorderSide(
-                                      color: Colors.black,
-                                      width: 1.0,
-                                      style: BorderStyle.solid, // Can be .solid, .dashed, etc.
-                                    ),
-                                  ),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Text(
-                                      DateFormat('yyyy-MM-dd HH:mm:ss').format(
-                                        DateTime.parse("${controller.issueModel.value.timestamp}"),
-                                      ),
-                                    ),
-                                    Text('${(amout/rat).toStringAsFixed(2)}'),
-                                    Text('          '),
-                                    Text('Nafim Ahmed'),
-                                  ],
-                                )
-
-                            );
-
-                          }),
+                        return Text('${controller.issueModel.value.results?[index].amount}',textAlign: TextAlign.center);}
+                      )),
+                      TableCell(child: Obx(()=>Text('${(controller.summeryModel.value.results?.totalTransactionsCripto)?.toStringAsFixed(2)}',textAlign: TextAlign.center))),
+                      TableCell(child: Obx(()=>Text('${controller.issueModel.value.results?[index].operatorName}',textAlign: TextAlign.center))),
                     ],
-                  )
-                      :Text('No data'),),
-                ],
-              ),
-            ),
+                  ),
+                // TableRow(
+                //   children: [
+                //     TableCell(child: Text('Row 2 Col 1')),
+                //     TableCell(child: Text('Row 2 Col 2')),
+                //     TableCell(child: Text('Row 2 Col 3')),
+                //   ],
+                // ),
+              ],
+            ):Text('No data found')),
+
+
+
+
+            // Container(
+            //
+            //   width: Get.width/1.5,
+            //   margin: EdgeInsets.symmetric(horizontal: 10),
+            //   decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.circular(15),
+            //       border: Border.all(width: 1,color: Colors.grey)
+            //   ),
+            //
+            //   child: Column(
+            //     children: [
+            //
+            //
+            //       Obx(()=>controller.issueModel.value.results!=null?
+            //       Column(
+            //         children: [
+            //           Row(
+            //             mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //             children: [
+            //               Text('Time'),
+            //               Container(
+            //                 padding: EdgeInsets.only(left: 80),
+            //                   child: Text('Amount')),
+            //               Text('Reply'),
+            //               Text('Operator'),
+            //
+            //
+            //             ],),
+            //           ListView.builder(
+            //               shrinkWrap: true,
+            //               itemCount: controller.issueModel.value.results?.length,
+            //               itemBuilder: (context,index){
+            //
+            //                 double rat=controller.issueModel.value.results?[index].rate??0;
+            //
+            //                 double amout=controller.issueModel.value.results?[index].amount??0;
+            //
+            //
+            //                 return Container(
+            //                     decoration: BoxDecoration(
+            //
+            //                       border: Border(
+            //                         top: BorderSide(
+            //                           color: Colors.black,
+            //                           width: 1.0,
+            //                           style: BorderStyle.solid, // Can be .solid, .dashed, etc.
+            //                         ),
+            //                       ),
+            //                     ),
+            //                     child: Row(
+            //                       mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //                       children: [
+            //                         Text(
+            //                           DateFormat('yyyy-MM-dd HH:mm:ss').format(
+            //                             DateTime.parse("${controller.issueModel.value.timestamp}"),
+            //                           ),
+            //                         ),
+            //                         Text('${(amout/rat).toStringAsFixed(2)}'),
+            //                         Text('          '),
+            //                         Text('Nafim Ahmed'),
+            //                       ],
+            //                     )
+            //
+            //                 );
+            //
+            //               }),
+            //         ],
+            //       )
+            //           :Text('No data'),),
+            //     ],
+            //   ),
+            // ),
 
 
 
@@ -315,7 +420,38 @@ class Home extends StatelessWidget {
                   children: [
 
 
-                    Text("No Data is available")
+                    Table(
+                      border: TableBorder.all(), // Adds borders to cells
+                      columnWidths: const {
+                        0: FlexColumnWidth(), // First column width
+                        1: FlexColumnWidth(),    // Second column (flexible)
+                        2: FlexColumnWidth(), // Third column width
+                      },
+                      children: [
+                        TableRow(
+                          decoration: BoxDecoration(color: Colors.grey[200]),
+                          children: [
+                            TableCell(child: Text('exchange rate	', textAlign: TextAlign.center)),
+                            TableCell(child: Text('Amount', textAlign: TextAlign.center)),
+                            TableCell(child: Text('Conversion', textAlign: TextAlign.center)),
+                          ],
+                        ),
+                        TableRow(
+                          children: [
+                            TableCell(child: Obx(()=>Text('${controller.summeryModel.value.results?.exchangeRate}',textAlign: TextAlign.center))),
+                            TableCell(child: Obx(()=>Text('${controller.summeryModel.value.results?.totalTransactions}',textAlign: TextAlign.center))),
+                            TableCell(child: Obx(()=>Text('${(controller.summeryModel.value.results?.totalTransactionsCripto)?.toStringAsFixed(2)}',textAlign: TextAlign.center))),
+                          ],
+                        ),
+                        // TableRow(
+                        //   children: [
+                        //     TableCell(child: Text('Row 2 Col 1')),
+                        //     TableCell(child: Text('Row 2 Col 2')),
+                        //     TableCell(child: Text('Row 2 Col 3')),
+                        //   ],
+                        // ),
+                      ],
+                    )
 
                   ],
                 ),),
