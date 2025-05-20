@@ -126,7 +126,10 @@ class Home extends StatelessWidget {
 
                         return Text('${controller.transectionModel.value.results?[index].amount}/${controller.transectionModel.value.results?[index].rate} = ${(amout/rat).toStringAsFixed(2)}',textAlign: TextAlign.center);}
                     )),
-                    TableCell(child: Obx(()=>Text('${(controller.summeryModel.value.results?.totalTransactionsCripto)?.toStringAsFixed(2)}',textAlign: TextAlign.center))),
+                    TableCell(
+                        child: Text('')
+                        // Obx(()=>Text('${(controller.summeryModel.value.results?.totalTransactionsCripto)?.toStringAsFixed(2)}',textAlign: TextAlign.center))
+                    ),
                     TableCell(child: Obx(()=>Text('${controller.transectionModel.value.results?[index].operatorName}',textAlign: TextAlign.center))),
                   ],
                 ),
@@ -255,7 +258,12 @@ class Home extends StatelessWidget {
 
                         return Text('${controller.issueModel.value.results?[index].amount}',textAlign: TextAlign.center);}
                       )),
-                      TableCell(child: Obx(()=>Text('${(controller.summeryModel.value.results?.totalTransactionsCripto)?.toStringAsFixed(2)}',textAlign: TextAlign.center))),
+                      TableCell(child: Text('')
+                      // Obx(()=>Text('${(controller.summeryModel.value.results?.totalTransactionsCripto)?.toStringAsFixed(2)}'
+                      //     ,textAlign: TextAlign.center)
+                      // )
+                      //
+                      ),
                       TableCell(child: Obx(()=>Text('${controller.issueModel.value.results?[index].operatorName}',textAlign: TextAlign.center))),
                     ],
                   ),
