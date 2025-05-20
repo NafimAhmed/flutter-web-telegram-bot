@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:untitled/components/expantion_widget.dart';
 import 'package:untitled/controller.dart';
 
 
@@ -37,22 +38,47 @@ class Home extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
-            Container(
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                border: Border.all(width: 1,color: Colors.grey)
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Obx(()=>Text('total Diposit: ${controller.summeryModel.value.results?.totalTransactions}')),
-                  Obx(()=>Text('Exchange Rate: ${controller.summeryModel.value.results?.exchangeRate}')),
-                  Obx(()=>Text('Rate: ${controller.summeryModel.value.results?.rate}')),
-                  Obx(()=>Text('Not issued: ${controller.summeryModel.value.results?.notIssuedMoney} || ${(controller.summeryModel.value.results?.notIssuedCrypto)?.toStringAsFixed(2)} USDT')),
-                  Obx(()=>Text('total Issued: ${controller.summeryModel.value.results?.totalIssuedMoney} || ${(controller.summeryModel.value.results?.totalIssuedUsdt)?.toStringAsFixed(2)} USDT')),
-                ],
-              ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(width: 1,color: Colors.grey)
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Obx(()=>Text('total Diposit: ${controller.summeryModel.value.results?.totalTransactions}')),
+                      Obx(()=>Text('Exchange Rate: ${controller.summeryModel.value.results?.exchangeRate}')),
+                      Obx(()=>Text('Rate: ${controller.summeryModel.value.results?.rate}')),
+                      Obx(()=>Text('Not issued: ${controller.summeryModel.value.results?.notIssuedMoney} || ${(controller.summeryModel.value.results?.notIssuedCrypto)?.toStringAsFixed(2)} USDT')),
+                      Obx(()=>Text('total Issued: ${controller.summeryModel.value.results?.totalIssuedMoney} || ${(controller.summeryModel.value.results?.totalIssuedUsdt)?.toStringAsFixed(2)} USDT')),
+                    ],
+                  ),
+                ),
+
+
+
+
+
+                ExpantionWidget(title: Text('Respondent Total Category'),
+                maxWidth: Get.width/2,
+                child: Column(
+                  children: [
+
+
+                    Text("No Data is available")
+
+                  ],
+                ),)
+
+
+
+
+
+              ],
             ),
 
 
@@ -246,6 +272,69 @@ class Home extends StatelessWidget {
             //
             //
             //     }))
+
+
+            Row(children: [
+
+
+              ExpantionWidget(title: Text('Deposit Respondent Classification'),
+                maxWidth: Get.width/2.2,
+                child: Column(
+                  children: [
+
+
+                    Text("No Data is available")
+
+                  ],
+                ),),
+
+
+              ExpantionWidget(title: Text('Deposit operator classification'),
+                maxWidth: Get.width/2.2,
+                child: Column(
+                  children: [
+
+
+                    Text("No Data is available")
+
+                  ],
+                ),)
+
+
+
+            ],),
+
+
+
+            Row(children: [
+
+
+              ExpantionWidget(title: Text('Deposit exchange rate classification'),
+                maxWidth: Get.width/2.2,
+                child: Column(
+                  children: [
+
+
+                    Text("No Data is available")
+
+                  ],
+                ),),
+
+
+              ExpantionWidget(title: Text('Category of people who send replies'),
+                maxWidth: Get.width/2.2,
+                child: Column(
+                  children: [
+
+
+                    Text("No Data is available")
+
+                  ],
+                ),)
+
+
+
+            ],)
 
 
 

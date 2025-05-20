@@ -15,6 +15,10 @@ class HomeController extends GetxController{
   Rx<TransectionModel> transectionModel=TransectionModel().obs;
   Rx<IssueModel> issueModel=IssueModel().obs;
   Rx<SummeryModel> summeryModel=SummeryModel().obs;
+  RxBool respondentTotalCategoryIsExpanded=false.obs;
+
+
+
 
 
 
