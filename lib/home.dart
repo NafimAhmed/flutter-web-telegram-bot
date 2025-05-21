@@ -99,7 +99,10 @@ class Home extends StatelessWidget {
                 2: FlexColumnWidth(), // Third column width
               },
               children: [
-                TableRow(
+
+
+
+                controller.transectionModel.value.results!.length>0?TableRow(
                   decoration: BoxDecoration(color: Colors.grey[200]),
                   children: [
                     TableCell(child: Text('time', textAlign: TextAlign.center)),
@@ -107,7 +110,18 @@ class Home extends StatelessWidget {
                     TableCell(child: Text('Reply	', textAlign: TextAlign.center)),
                     TableCell(child: Text('Operator	', textAlign: TextAlign.center)),
                   ],
+                ):TableRow(
+                  decoration: BoxDecoration(color: Colors.grey[200]),
+                  children: [
+                    TableCell(child: Text('No data', textAlign: TextAlign.center)),
+
+                  ],
                 ),
+
+
+
+
+
 
                 for(int index=0;index<controller.transectionModel.value.results!.length;index++)
                 TableRow(
@@ -231,13 +245,18 @@ class Home extends StatelessWidget {
                 2: FlexColumnWidth(), // Third column width
               },
               children: [
-                TableRow(
+                controller.issueModel.value.results!.length>0? TableRow(
                   decoration: BoxDecoration(color: Colors.grey[200]),
                   children: [
                     TableCell(child: Text('time', textAlign: TextAlign.center)),
                     TableCell(child: Text('Amount', textAlign: TextAlign.center)),
                     TableCell(child: Text('Reply	', textAlign: TextAlign.center)),
                     TableCell(child: Text('Operator	', textAlign: TextAlign.center)),
+                  ],
+                ):TableRow(
+                  decoration: BoxDecoration(color: Colors.grey[200]),
+                  children: [
+                    TableCell(child: Text('No data', textAlign: TextAlign.center))
                   ],
                 ),
 
