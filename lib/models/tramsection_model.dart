@@ -2,7 +2,6 @@
 
 
 
-
 // To parse this JSON data, do
 //
 //     final transectionModel = transectionModelFromJson(jsonString);
@@ -48,6 +47,7 @@ class Result {
   String? operatorId;
   String? chatId;
   DateTime? time;
+  String? repliedBy;
 
   Result({
     this.amount,
@@ -56,6 +56,7 @@ class Result {
     this.operatorId,
     this.chatId,
     this.time,
+    this.repliedBy,
   });
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
@@ -65,6 +66,7 @@ class Result {
     operatorId: json["operatorID"],
     chatId: json["chatID"],
     time: DateTime.parse(json["time"]),
+    repliedBy: json["replied_by"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -74,5 +76,6 @@ class Result {
     "operatorID": operatorId,
     "chatID": chatId,
     "time": time?.toIso8601String(),
+    "replied_by": repliedBy,
   };
 }

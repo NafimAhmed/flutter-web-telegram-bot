@@ -1,8 +1,6 @@
 
 
 
-
-
 // To parse this JSON data, do
 //
 //     final issueModel = issueModelFromJson(jsonString);
@@ -52,6 +50,7 @@ class Result {
   String? operatorId;
   String? chatId;
   DateTime? time;
+  String? reply;
 
   Result({
     this.amount,
@@ -60,6 +59,7 @@ class Result {
     this.operatorId,
     this.chatId,
     this.time,
+    this.reply,
   });
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
@@ -69,6 +69,7 @@ class Result {
     operatorId: json["operatorID"],
     chatId: json["chatID"],
     time: DateTime.parse(json["time"]),
+    reply: json["reply"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -78,5 +79,6 @@ class Result {
     "operatorID": operatorId,
     "chatID": chatId,
     "time": time?.toIso8601String(),
+    "reply": reply,
   };
 }
