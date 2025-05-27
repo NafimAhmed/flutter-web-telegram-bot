@@ -28,7 +28,7 @@ class HomeController extends GetxController{
 
   Future<void> transectionData() async {
 
-    const apiUrl = 'http://172.16.16.62:5000/api/transactions';
+    const apiUrl = 'https://tg-bot2975.fly.dev/api/transactions';
     final uri = Uri.parse(apiUrl);
 
 
@@ -66,7 +66,7 @@ class HomeController extends GetxController{
 
   Future<void> transectionSummeryData() async {
 
-    const apiUrl = 'http://172.16.16.62:5000/api/summary';
+    const apiUrl = 'https://tg-bot2975.fly.dev/api/summary';
     final uri = Uri.parse(apiUrl);
 
 
@@ -106,7 +106,7 @@ class HomeController extends GetxController{
 
   Future<void> issueData() async {
 
-    const apiUrl = 'http://172.16.16.62:5000/api/issued';
+    const apiUrl = 'https://tg-bot2975.fly.dev/api/issued';
     final uri = Uri.parse(apiUrl);
 
 
