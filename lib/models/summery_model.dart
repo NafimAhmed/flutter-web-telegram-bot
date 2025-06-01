@@ -13,77 +13,69 @@ SummeryModel summeryModelFromJson(String str) => SummeryModel.fromJson(json.deco
 String summeryModelToJson(SummeryModel data) => json.encode(data.toJson());
 
 class SummeryModel {
-  bool? success;
   Results? results;
-  DateTime? timestamp;
-  String? message;
+  bool? success;
 
   SummeryModel({
-    this.success,
     this.results,
-    this.timestamp,
-    this.message,
+    this.success,
   });
 
   factory SummeryModel.fromJson(Map<String, dynamic> json) => SummeryModel(
-    success: json["success"],
     results: Results.fromJson(json["results"]),
-    timestamp: DateTime.parse(json["timestamp"]),
-    message: json["message"],
+    success: json["success"],
   );
 
   Map<String, dynamic> toJson() => {
-    "success": success,
     "results": results?.toJson(),
-    "timestamp": timestamp?.toIso8601String(),
-    "message": message,
+    "success": success,
   };
 }
 
 class Results {
-  double? totalTransactions;
-  double? totalTransactionsCripto;
-  double? totalIssued;
-  double? rate;
-  double? exchangeRate;
-  double? totalIssuedMoney;
-  double? totalIssuedUsdt;
-  double? notIssuedMoney;
+  int? exchangeRate;
   double? notIssuedCrypto;
+  int? notIssuedMoney;
+  int? rate;
+  int? totalIssued;
+  int? totalIssuedMoney;
+  int? totalIssuedUsdt;
+  int? totalTransactions;
+  double? totalTransactionsCripto;
 
   Results({
-    this.totalTransactions,
-    this.totalTransactionsCripto,
-    this.totalIssued,
-    this.rate,
     this.exchangeRate,
+    this.notIssuedCrypto,
+    this.notIssuedMoney,
+    this.rate,
+    this.totalIssued,
     this.totalIssuedMoney,
     this.totalIssuedUsdt,
-    this.notIssuedMoney,
-    this.notIssuedCrypto,
+    this.totalTransactions,
+    this.totalTransactionsCripto,
   });
 
   factory Results.fromJson(Map<String, dynamic> json) => Results(
-    totalTransactions: json["totalTransactions"],
-    totalTransactionsCripto: json["totalTransactionsCripto"].toDouble(),
-    totalIssued: json["totalIssued"],
-    rate: json["rate"],
     exchangeRate: json["exchangeRate"],
+    notIssuedCrypto: json["notIssuedCrypto"].toDouble(),
+    notIssuedMoney: json["notIssuedMoney"],
+    rate: json["rate"],
+    totalIssued: json["totalIssued"],
     totalIssuedMoney: json["totalIssuedMoney"],
     totalIssuedUsdt: json["totalIssuedUSDT"],
-    notIssuedMoney: json["notIssuedMoney"],
-    notIssuedCrypto: json["notIssuedCrypto"].toDouble(),
+    totalTransactions: json["totalTransactions"],
+    totalTransactionsCripto: json["totalTransactionsCripto"].toDouble(),
   );
 
   Map<String, dynamic> toJson() => {
-    "totalTransactions": totalTransactions,
-    "totalTransactionsCripto": totalTransactionsCripto,
-    "totalIssued": totalIssued,
-    "rate": rate,
     "exchangeRate": exchangeRate,
+    "notIssuedCrypto": notIssuedCrypto,
+    "notIssuedMoney": notIssuedMoney,
+    "rate": rate,
+    "totalIssued": totalIssued,
     "totalIssuedMoney": totalIssuedMoney,
     "totalIssuedUSDT": totalIssuedUsdt,
-    "notIssuedMoney": notIssuedMoney,
-    "notIssuedCrypto": notIssuedCrypto,
+    "totalTransactions": totalTransactions,
+    "totalTransactionsCripto": totalTransactionsCripto,
   };
 }

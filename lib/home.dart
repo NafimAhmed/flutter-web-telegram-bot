@@ -199,12 +199,7 @@ class Home extends StatelessWidget {
                                     .length;
                             index++
                           )
-                            if (controller
-                                .transectionModel
-                                .value
-                                .results![index]
-                                .chatId!
-                                .contains(chatId ?? ''))
+                            if (controller.transectionModel.value.results![index].chatId!.contains(chatId ?? ''))
                               TableRow(
                                 children: [
                                   TableCell(
@@ -218,19 +213,8 @@ class Home extends StatelessWidget {
                                   TableCell(
                                     child: Obx(() {
                                       double rat =
-                                          controller
-                                              .transectionModel
-                                              .value
-                                              .results?[index]
-                                              .rate ??
-                                          0;
-                                      double amout =
-                                          controller
-                                              .transectionModel
-                                              .value
-                                              .results?[index]
-                                              .amount ??
-                                          1;
+                                          controller.transectionModel.value.results?[index].rate ?? 0;
+                                      double amout = controller.transectionModel.value.results?[index].amount ?? 1;
                                       return Text(
                                         '${controller.transectionModel.value.results?[index].amount}/${controller.transectionModel.value.results?[index].rate} = ${(amout / rat).toStringAsFixed(2)}',
                                         textAlign: TextAlign.center,
@@ -345,12 +329,7 @@ class Home extends StatelessWidget {
                                   TableCell(
                                     child: Obx(() {
                                       double amount =
-                                          controller
-                                              .issueModel
-                                              .value
-                                              .results?[index]
-                                              .amount ??
-                                          0;
+                                          controller.issueModel.value.results?[index].amount ?? 0;
                                       return Text(
                                         '$amount',
                                         textAlign: TextAlign.center,

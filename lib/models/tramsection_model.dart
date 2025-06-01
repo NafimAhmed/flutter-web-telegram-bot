@@ -2,6 +2,7 @@
 
 
 
+
 // To parse this JSON data, do
 //
 //     final transectionModel = transectionModelFromJson(jsonString);
@@ -13,69 +14,69 @@ TransectionModel transectionModelFromJson(String str) => TransectionModel.fromJs
 String transectionModelToJson(TransectionModel data) => json.encode(data.toJson());
 
 class TransectionModel {
-  bool? success;
-  List<Result>? results;
   int? count;
+  List<Result>? results;
+  bool? success;
   DateTime? timestamp;
 
   TransectionModel({
-    this.success,
-    this.results,
     this.count,
+    this.results,
+    this.success,
     this.timestamp,
   });
 
   factory TransectionModel.fromJson(Map<String, dynamic> json) => TransectionModel(
-    success: json["success"],
-    results: List<Result>.from(json["results"].map((x) => Result.fromJson(x))),
     count: json["count"],
+    results: List<Result>.from(json["results"].map((x) => Result.fromJson(x))),
+    success: json["success"],
     timestamp: DateTime.parse(json["timestamp"]),
   );
 
   Map<String, dynamic> toJson() => {
-    "success": success,
-    "results": List<dynamic>.from(results!.map((x) => x.toJson())),
     "count": count,
+    "results": List<dynamic>.from(results!.map((x) => x.toJson())),
+    "success": success,
     "timestamp": timestamp?.toIso8601String(),
   };
 }
 
 class Result {
   double? amount;
-  double? rate;
-  String? operatorName;
-  String? operatorId;
   String? chatId;
-  DateTime? time;
+  String? operatorId;
+  String? operatorName;
+  double? rate;
   String? repliedBy;
+  DateTime? time;
 
   Result({
     this.amount,
-    this.rate,
-    this.operatorName,
-    this.operatorId,
     this.chatId,
-    this.time,
+    this.operatorId,
+    this.operatorName,
+    this.rate,
     this.repliedBy,
+    this.time,
   });
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
     amount: json["amount"],
+    chatId: json["chat_id"],
+    operatorId: json["operator_id"],
+    operatorName: json["operator_name"],
     rate: json["rate"],
-    operatorName: json["operator_Name"],
-    operatorId: json["operatorID"],
-    chatId: json["chatID"],
-    time: DateTime.parse(json["time"]),
     repliedBy: json["replied_by"],
+    time: DateTime.parse(json["time"]),
   );
 
   Map<String, dynamic> toJson() => {
     "amount": amount,
+    "chat_id": chatId,
+    "operator_id": operatorId,
+    "operator_name": operatorName,
     "rate": rate,
-    "operator_Name": operatorName,
-    "operatorID": operatorId,
-    "chatID": chatId,
-    "time": time?.toIso8601String(),
     "replied_by": repliedBy,
+    "time": time?.toIso8601String(),
   };
 }
