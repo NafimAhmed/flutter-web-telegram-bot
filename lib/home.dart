@@ -26,9 +26,11 @@ class Home extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Container(
+                  width: Get.width/2.2,
                   padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
@@ -54,7 +56,7 @@ class Home extends StatelessWidget {
                       ),
                       Obx(
                         () => Text(
-                          'Not issued: ${controller.summeryModel.value.results?.notIssuedMoney} || ${(controller.summeryModel.value.results?.notIssuedCrypto)?.toStringAsFixed(2)} USDT',
+                          'Should be issued: ${controller.summeryModel.value.results?.notIssuedMoney} || ${(controller.summeryModel.value.results?.notIssuedCrypto)?.toStringAsFixed(2)} USDT',
                         ),
                       ),
                       Obx(
@@ -62,13 +64,32 @@ class Home extends StatelessWidget {
                           'total Issued: ${controller.summeryModel.value.results?.totalIssuedMoney} || ${(controller.summeryModel.value.results?.totalIssuedUsdt)?.toStringAsFixed(2)} USDT',
                         ),
                       ),
+
+
+                      Obx(
+                            () {
+
+
+                              double ntissudamt= controller.summeryModel.value.results?.notIssuedMoney??0;
+                              double issudamt= controller.summeryModel.value.results?.totalIssuedMoney??0;
+                              double ntissudUSDT= controller.summeryModel.value.results?.notIssuedCrypto??0;
+                              double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
+
+
+
+                              return Text(
+                                'Not issued: ${(ntissudamt-issudamt).toStringAsFixed(2)} || ${(ntissudUSDT-issudamtUSDT)?.toStringAsFixed(2)} USDT',
+                              );
+                            }
+                      ),
+
                     ],
                   ),
                 ),
 
                 ExpantionWidget(
                   title: Text('Respondent Category'),
-                  maxWidth: Get.width / 2,
+                  maxWidth: Get.width / 2.2,
                   child: Column(
                     children: [
                       Table(
@@ -111,9 +132,29 @@ class Home extends StatelessWidget {
                           TableRow(
                             children: [
                               TableCell(child: Text('')),
-                              TableCell(child: Text('')),
-                              TableCell(child: Text('')),
-                              TableCell(child: Text('')),
+                              TableCell(child:  Obx(
+                                    () => Text(
+                                  '${controller.summeryModel.value.results?.totalTransactions}',
+                                ),
+                              ),),
+                              TableCell(child: Obx(
+                                    () => Text(
+                                  '${(controller.summeryModel.value.results?.totalIssuedUsdt)?.toStringAsFixed(2)}',
+                                ),
+                              ),),
+                              TableCell(child:   Obx(
+                                      () {
+
+                                    double ntissudUSDT= controller.summeryModel.value.results?.notIssuedCrypto??0;
+                                    double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
+
+                                    return Text(
+                                      '${(ntissudUSDT-issudamtUSDT).toStringAsFixed(2)}',
+                                    );
+                                  }
+                              ),),
+
+
                             ],
                           ),
                         ],
@@ -370,6 +411,8 @@ class Home extends StatelessWidget {
 
 
                 Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+
               children: [
                 ExpantionWidget(
                   title: Text('Deposit Respondent Classification'),
@@ -553,6 +596,7 @@ class Home extends StatelessWidget {
 
 
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ExpantionWidget(
                   title: Text('Deposit exchange rate classification'),
@@ -623,11 +667,120 @@ class Home extends StatelessWidget {
                     ],
                   ),
                 ),
-                ExpantionWidget(
+
+
+
+                Obx(()=>controller.issueModel.value.results != null||controller.issueModel.value.results!.length>0?ExpantionWidget(
                   title: Text('Category of people who send replies'),
                   maxWidth: Get.width / 2.2,
-                  child: Column(children: [Text("No Data is available")]),
-                ),
+                  child: Column(
+                    children: [
+                      Table(
+                        border: TableBorder.all(),
+                        columnWidths: const {
+                          0: FlexColumnWidth(),
+                          1: FlexColumnWidth(),
+
+                        },
+                        children: [
+                          TableRow(
+                            decoration: BoxDecoration(color: Colors.grey[200]),
+                            children: [
+                              TableCell(
+                                child: Text(
+                                  'Replies',
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              TableCell(
+                                child: Text(
+                                  'Amount',
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+
+
+                              // TableCell(
+                              //   child: Text(
+                              //     'Conversion',
+                              //     textAlign: TextAlign.center,
+                              //   ),
+                              // ),
+                            ],
+                          ),
+
+                          for (
+                          int index = 0;
+                          index < controller.issueModel.value.results!.length;
+                          index++
+                          )
+                            if (controller
+                                .issueModel
+                                .value
+                                .results![index]
+                                .chatId!
+                                .contains(chatId ?? '')
+                                &&controller
+                                    .issueModel
+                                    .value
+                                    .results![index].reply!='')
+
+
+
+                              TableRow(
+                                children: [
+                                  TableCell(
+                                    child: Obx(
+                                          () => Text(
+                                        '${controller
+                                            .issueModel
+                                            .value
+                                            .results?[index].reply}',
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                  TableCell(
+                                    child: Obx(
+                                          () => Text(
+                                        '${controller
+                                            .issueModel
+                                            .value
+                                            .results![index].amount}',
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+
+                                ],
+                              ),
+
+
+
+
+
+
+                        ],
+                      ),
+                    ],
+                  ),
+                ):
+
+
+                  ExpantionWidget(
+                    title: Text('Category of people who send replies'),
+                    maxWidth: Get.width / 2.2,
+                    child: Column(children: [Text("No Data is available")]),
+                  ),
+
+
+                )
+
+
+
+
+
+
               ],
             ),
           ],

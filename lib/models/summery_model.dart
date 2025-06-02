@@ -35,12 +35,12 @@ class SummeryModel {
 class Results {
   int? exchangeRate;
   double? notIssuedCrypto;
-  int? notIssuedMoney;
-  int? rate;
-  int? totalIssued;
-  int? totalIssuedMoney;
-  int? totalIssuedUsdt;
-  int? totalTransactions;
+  double? notIssuedMoney;
+  double? rate;
+  double? totalIssued;
+  double? totalIssuedMoney;
+  double? totalIssuedUsdt;
+  double? totalTransactions;
   double? totalTransactionsCripto;
 
   Results({
