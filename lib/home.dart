@@ -169,7 +169,8 @@ class Home extends StatelessWidget {
                     child: Column(
                       children: [
 
-                        Obx(()=> controller.transectionModel.value.results != null?Table(
+                        Obx(()=> controller.transectionModel.value.results != null?
+                        Table(
                           border: TableBorder.all(),
                           columnWidths: const {
                             0: FlexColumnWidth(),
@@ -250,10 +251,34 @@ class Home extends StatelessWidget {
                                               ,
                                     ),),
                                     TableCell(child: Obx(
-                                          () => Text(
-                                        '${(controller.summeryModel.value.results?.totalIssuedUsdt)?.toStringAsFixed(2)}',
-                                        textAlign: TextAlign.center,
-                                      ),
+                                          () {
+
+                                            String repliedIssuedAmount='';
+
+                                            for (
+                                            int i = 0; i < controller.issueModel.value.results!.length; i++
+                                            )
+                                             {
+                                               if(controller.issueModel.value.results![i].reply!.contains('${controller.transectionModel.value.results?[index].repliedBy}')){
+                                                 repliedIssuedAmount='${(controller.issueModel.value.results![i].amount)?.toStringAsFixed(2)}';
+                                               }
+
+
+                                             }
+
+
+
+
+
+                                            return Text(
+                                              '${repliedIssuedAmount}',
+                                              textAlign: TextAlign.center,
+                                            );
+                                          }
+
+
+
+                                              ,
                                     ),),
                                     TableCell(child:   Obx(
                                             () {
