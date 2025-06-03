@@ -45,27 +45,27 @@ class Home extends StatelessWidget {
                       children: [
                         Obx(
                           () => Text(
-                            'total Diposit: ${controller.summeryModel.value.results?.totalTransactions}',
+                            '总入款金额(Total deposit amount): ${controller.summeryModel.value.results?.totalTransactions}',
                           ),
                         ),
                         Obx(
                           () => Text(
-                            'Exchange Rate: ${controller.summeryModel.value.results?.exchangeRate}',
+                            '汇率(Exchange Rate): ${controller.summeryModel.value.results?.exchangeRate}',
                           ),
                         ),
                         Obx(
                           () => Text(
-                            'Rate: ${controller.summeryModel.value.results?.rate}',
+                            '费率(Rate): ${controller.summeryModel.value.results?.rate}',
                           ),
                         ),
                         Obx(
                           () => Text(
-                            'Should be issued: ${controller.summeryModel.value.results?.notIssuedMoney} || ${(controller.summeryModel.value.results?.notIssuedCrypto)?.toStringAsFixed(2)} USDT',
+                            '应下发(Should be issued): ${controller.summeryModel.value.results?.notIssuedMoney} || ${(controller.summeryModel.value.results?.notIssuedCrypto)?.toStringAsFixed(2)} USDT',
                           ),
                         ),
                         Obx(
                           () => Text(
-                            'total Issued: ${controller.summeryModel.value.results?.totalIssuedMoney} || ${(controller.summeryModel.value.results?.totalIssuedUsdt)?.toStringAsFixed(2)} USDT',
+                            '已下发(total Issued): ${controller.summeryModel.value.results?.totalIssuedMoney} || ${(controller.summeryModel.value.results?.totalIssuedUsdt)?.toStringAsFixed(2)} USDT',
                           ),
                         ),
 
@@ -82,7 +82,7 @@ class Home extends StatelessWidget {
 
 
                                 return Text(
-                                  'Not issued: ${(ntissudamt-issudamt).toStringAsFixed(2)} || ${(ntissudUSDT-issudamtUSDT)?.toStringAsFixed(2)} USDT',
+                                  '未下发(Not issued): ${(ntissudamt-issudamt).toStringAsFixed(2)} || ${(ntissudUSDT-issudamtUSDT)?.toStringAsFixed(2)} USDT',
                                 );
                               }
                         ),
@@ -92,7 +92,7 @@ class Home extends StatelessWidget {
                   ),
 
                   ExpantionWidget(
-                    title: Text('Respondent Category',style: GoogleFonts.poppins(
+                    title: Text('回复人总分类(Respondent Category)',style: GoogleFonts.poppins(
                         fontSize: 20,
                         fontWeight: FontWeight.w400
                     ),),
@@ -112,25 +112,25 @@ class Home extends StatelessWidget {
                               children: [
                                 TableCell(
                                   child: Text(
-                                    'Reply',
+                                    '回复人(Reply)',
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
                                 TableCell(
                                   child: Text(
-                                    'Deposit',
+                                    '入款(Deposit)',
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
                                 TableCell(
                                   child: Text(
-                                    'Issued',
+                                    '已下发(Issued)',
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
                                 TableCell(
                                   child: Text(
-                                    'Not issued',
+                                    '未下发(Not issued)',
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
@@ -196,7 +196,7 @@ class Home extends StatelessWidget {
 
                     Obx(
                           () => Text(
-                        'Deposit (${controller.transectionModel.value.count} Transections)',
+                        '入款(Deposit) (${controller.transectionModel.value.count} 笔(Transections))',
                         style: GoogleFonts.poppins(
                             fontSize: 20,
                             fontWeight: FontWeight.w400
@@ -224,25 +224,25 @@ class Home extends StatelessWidget {
                             children: [
                               TableCell(
                                 child: Text(
-                                  'time',
+                                  '时间(time)',
                                   textAlign: TextAlign.center,
                                 ),
                               ),
                               TableCell(
                                 child: Text(
-                                  'Amount',
+                                  '金额(Amount)',
                                   textAlign: TextAlign.center,
                                 ),
                               ),
                               TableCell(
                                 child: Text(
-                                  'Reply',
+                                  '回复人(Reply)',
                                   textAlign: TextAlign.center,
                                 ),
                               ),
                               TableCell(
                                 child: Text(
-                                  'Operator',
+                                  '操作人(Operator)',
                                   textAlign: TextAlign.center,
                                 ),
                               ),
@@ -354,7 +354,7 @@ class Home extends StatelessWidget {
 
                     SizedBox(height: 10),
 
-                    Text('Issue(Pen)', style: GoogleFonts.poppins(
+                    Text('下发(Issue)(笔(Pen))', style: GoogleFonts.poppins(
                         fontSize: 20,
                         fontWeight: FontWeight.w400
                     ),),
@@ -379,25 +379,25 @@ class Home extends StatelessWidget {
                             children: [
                               TableCell(
                                 child: Text(
-                                  'time',
+                                  '时间(time)',
                                   textAlign: TextAlign.center,
                                 ),
                               ),
                               TableCell(
                                 child: Text(
-                                  'Amount',
+                                  '金额(Amount)',
                                   textAlign: TextAlign.center,
                                 ),
                               ),
                               TableCell(
                                 child: Text(
-                                  'Reply',
+                                  '回复人(Reply)',
                                   textAlign: TextAlign.center,
                                 ),
                               ),
                               TableCell(
                                 child: Text(
-                                  'Operator',
+                                  '操作人(Operator)',
                                   textAlign: TextAlign.center,
                                 ),
                               ),
@@ -492,7 +492,7 @@ class Home extends StatelessWidget {
 
                 children: [
                   ExpantionWidget(
-                    title: Text('Deposit Respondent Classification',style: GoogleFonts.poppins(
+                    title: Text('入款回复人分类(Deposit Respondent Classification)',style: GoogleFonts.poppins(
                         fontSize: 20,
                         fontWeight: FontWeight.w400
                     ),),
@@ -514,25 +514,25 @@ class Home extends StatelessWidget {
                             children: [
                               TableCell(
                                 child: Text(
-                                  'Reply',
+                                  '回复人(Reply)',
                                   textAlign: TextAlign.center,
                                 ),
                               ),
                               TableCell(
                                 child: Text(
-                                  'Amount',
+                                  '金额(Amount)',
                                   textAlign: TextAlign.center,
                                 ),
                               ),
                               TableCell(
                                 child: Text(
-                                  'Reduced rates',
+                                  '减费率(Reduced rates)',
                                   textAlign: TextAlign.center,
                                 ),
                               ),
                               TableCell(
                                 child: Text(
-                                  'Conversion',
+                                  '换算(Conversion)',
                                   textAlign: TextAlign.center,
                                 ),
                               ),
@@ -595,7 +595,7 @@ class Home extends StatelessWidget {
                   ),
 
                   ExpantionWidget(
-                    title: Text('Deposit operator classification', style: GoogleFonts.poppins(
+                    title: Text('入款操作人分类(Deposit operator classification)', style: GoogleFonts.poppins(
                         fontSize: 20,
                         fontWeight: FontWeight.w400
                     ),),
@@ -615,19 +615,19 @@ class Home extends StatelessWidget {
                               children: [
                                 TableCell(
                                   child: Text(
-                                    'Operator',
+                                    '操作人(Operator)',
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
                                 TableCell(
                                   child: Text(
-                                    'Amount',
+                                    '金额(Amount)',
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
                                 TableCell(
                                   child: Text(
-                                    'Conversion',
+                                    '换算(Conversion)',
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
@@ -682,7 +682,7 @@ class Home extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ExpantionWidget(
-                    title: Text('Deposit exchange rate classification', style: GoogleFonts.poppins(
+                    title: Text('入款汇率分类 (Deposit exchange rate classification)', style: GoogleFonts.poppins(
                         fontSize: 20,
                         fontWeight: FontWeight.w400
                     ),),
@@ -702,19 +702,19 @@ class Home extends StatelessWidget {
                               children: [
                                 TableCell(
                                   child: Text(
-                                    'exchange rate',
+                                    '汇率(exchange rate)',
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
                                 TableCell(
                                   child: Text(
-                                    'Amount',
+                                    '金额(Amount)',
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
                                 TableCell(
                                   child: Text(
-                                    'Conversion',
+                                    '换算(Conversion)',
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
@@ -756,8 +756,16 @@ class Home extends StatelessWidget {
 
 
 
-                  Obx(()=>controller.issueModel.value.results != null||controller.issueModel.value.results!.length>0?ExpantionWidget(
-                    title: Text('Category of people who send replies', style: GoogleFonts.poppins(
+                  Obx(()=>controller.issueModel.value.results != null
+
+                      // ||controller.issueModel.value.results!.length>0
+
+
+                      ?
+
+
+                  ExpantionWidget(
+                    title: Text('下发回复人分类(Category of people who send replies)', style: GoogleFonts.poppins(
                         fontSize: 18,
                         fontWeight: FontWeight.w400
                     ),),
@@ -777,13 +785,13 @@ class Home extends StatelessWidget {
                               children: [
                                 TableCell(
                                   child: Text(
-                                    'Replies',
+                                    '回复人(Replies)',
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
                                 TableCell(
                                   child: Text(
-                                    'Amount',
+                                    '金额(Amount)',
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
