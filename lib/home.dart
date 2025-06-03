@@ -104,6 +104,7 @@ class Home extends StatelessWidget {
                   ),
 
                   ExpantionWidget(
+                    topmargin: 0,
                     title: Text('回复人总分类(Respondent Category)',style: GoogleFonts.poppins(
                         fontSize: 20,
                         fontWeight: FontWeight.w400
@@ -508,6 +509,7 @@ class Home extends StatelessWidget {
 
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.start,
 
                 children: [
                   ExpantionWidget(
@@ -699,6 +701,7 @@ class Home extends StatelessWidget {
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ExpantionWidget(
                     title: Text('入款汇率分类 (Deposit exchange rate classification)', style: GoogleFonts.poppins(

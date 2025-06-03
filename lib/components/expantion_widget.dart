@@ -7,13 +7,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ExpantionWidget extends StatelessWidget {
-   ExpantionWidget({super.key, required this.child, required this.title, required this.maxWidth});
+   ExpantionWidget({super.key, required this.child, required this.title, required this.maxWidth,  this.topmargin=20});
 
   RxBool isTileExpanded=true.obs;
 
   final Widget child;
   final Widget title;
   final double maxWidth;
+  final double topmargin;
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class ExpantionWidget extends StatelessWidget {
       ),
       child: Container(
 
-        margin: EdgeInsets.only(top: 20),
+        margin: EdgeInsets.only(top: topmargin),
 
 
         decoration: BoxDecoration(
