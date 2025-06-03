@@ -20,7 +20,7 @@ class Home extends StatelessWidget {
     controller.issueData();
 
     return Scaffold(
-      appBar: AppBar(title: Text("Transection Detail")),
+      appBar: AppBar(title: Text("横断面细节(Transection Detail)")),
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
@@ -30,64 +30,76 @@ class Home extends StatelessWidget {
 
 
               Row(
-                // crossAxisAlignment: CrossAxisAlignment.start,
+                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
-                    width: Get.width/2.2,
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(width: 1, color: Colors.grey),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Obx(
-                          () => Text(
-                            '总入款金额(Total deposit amount): ${controller.summeryModel.value.results?.totalTransactions}',
+                  Material(
+                    elevation: 2,
+                    child: Container(
+                      width: Get.width/2.2,
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        // borderRadius: BorderRadius.circular(15),
+                        border: Border(
+                          top: BorderSide( // This adds the upper border
+                            color: Colors.blueAccent,
+                            width: 5,
+                          ),),
+
+
+
+
+
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Obx(
+                            () => Text(
+                              '总入款金额(Total deposit amount): ${controller.summeryModel.value.results?.totalTransactions}',
+                            ),
                           ),
-                        ),
-                        Obx(
-                          () => Text(
-                            '汇率(Exchange Rate): ${controller.summeryModel.value.results?.exchangeRate}',
+                          Obx(
+                            () => Text(
+                              '汇率(Exchange Rate): ${controller.summeryModel.value.results?.exchangeRate}',
+                            ),
                           ),
-                        ),
-                        Obx(
-                          () => Text(
-                            '费率(Rate): ${controller.summeryModel.value.results?.rate}',
+                          Obx(
+                            () => Text(
+                              '费率(Rate): ${controller.summeryModel.value.results?.rate}',
+                            ),
                           ),
-                        ),
-                        Obx(
-                          () => Text(
-                            '应下发(Should be issued): ${controller.summeryModel.value.results?.notIssuedMoney} || ${(controller.summeryModel.value.results?.notIssuedCrypto)?.toStringAsFixed(2)} USDT',
+                          Obx(
+                            () => Text(
+                              '应下发(Should be issued): ${controller.summeryModel.value.results?.notIssuedMoney} || ${(controller.summeryModel.value.results?.notIssuedCrypto)?.toStringAsFixed(2)} USDT',
+                            ),
                           ),
-                        ),
-                        Obx(
-                          () => Text(
-                            '已下发(total Issued): ${controller.summeryModel.value.results?.totalIssuedMoney} || ${(controller.summeryModel.value.results?.totalIssuedUsdt)?.toStringAsFixed(2)} USDT',
+                          Obx(
+                            () => Text(
+                              '已下发(total Issued): ${controller.summeryModel.value.results?.totalIssuedMoney} || ${(controller.summeryModel.value.results?.totalIssuedUsdt)?.toStringAsFixed(2)} USDT',
+                            ),
                           ),
-                        ),
 
 
-                        Obx(
-                              () {
+                          Obx(
+                                () {
 
 
-                                double ntissudamt= controller.summeryModel.value.results?.notIssuedMoney??0;
-                                double issudamt= controller.summeryModel.value.results?.totalIssuedMoney??0;
-                                double ntissudUSDT= controller.summeryModel.value.results?.notIssuedCrypto??0;
-                                double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
+                                  double ntissudamt= controller.summeryModel.value.results?.notIssuedMoney??0;
+                                  double issudamt= controller.summeryModel.value.results?.totalIssuedMoney??0;
+                                  double ntissudUSDT= controller.summeryModel.value.results?.notIssuedCrypto??0;
+                                  double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
 
 
 
-                                return Text(
-                                  '未下发(Not issued): ${(ntissudamt-issudamt).toStringAsFixed(2)} || ${(ntissudUSDT-issudamtUSDT)?.toStringAsFixed(2)} USDT',
-                                );
-                              }
-                        ),
+                                  return Text(
+                                    '未下发(Not issued): ${(ntissudamt-issudamt).toStringAsFixed(2)} || ${(ntissudUSDT-issudamtUSDT)?.toStringAsFixed(2)} USDT',
+                                  );
+                                }
+                          ),
 
-                      ],
+                        ],
+                      ),
                     ),
                   ),
 
@@ -175,150 +187,154 @@ class Home extends StatelessWidget {
               SizedBox(height: 20),
 
 
-              Container(
+              Material(
+                elevation: 2,
+                child: Container(
+                  padding: EdgeInsets.only(left: 8,bottom: 8,right: 8),
 
-                decoration: BoxDecoration(
-                  border: Border(
-                    top: BorderSide( // This adds the upper border
-                      color: Colors.blueAccent,
-                      width: 5,
-                    ),
-                  ),
-                ),
-
-
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-
-                    SizedBox(height: 10),
-
-
-                    Obx(
-                          () => Text(
-                        '入款(Deposit) (${controller.transectionModel.value.count} 笔(Transections))',
-                        style: GoogleFonts.poppins(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w400
-                        ),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      top: BorderSide( // This adds the upper border
+                        color: Colors.blueAccent,
+                        width: 5,
                       ),
                     ),
-                    SizedBox(height: 10),
+                  ),
 
-                    Obx(
-                          () =>
-                      controller.transectionModel.value.results != null
-                          ? Table(
-                        border: TableBorder.all(),
-                        columnWidths: const {
-                          0: FlexColumnWidth(),
-                          1: FlexColumnWidth(),
-                          2: FlexColumnWidth(),
-                        },
-                        children: [
-                          controller.transectionModel.value.results!.isNotEmpty
-                              ? TableRow(
-                            decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                            ),
-                            children: [
-                              TableCell(
-                                child: Text(
-                                  '时间(time)',
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                              TableCell(
-                                child: Text(
-                                  '金额(Amount)',
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                              TableCell(
-                                child: Text(
-                                  '回复人(Reply)',
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                              TableCell(
-                                child: Text(
-                                  '操作人(Operator)',
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ],
-                          )
-                              : TableRow(
-                            decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                            ),
-                            children: [
-                              TableCell(
-                                child: Text(
-                                  'No data',
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ],
+
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+
+                      SizedBox(height: 10),
+
+
+                      Obx(
+                            () => Text(
+                          '入款(Deposit) (${controller.transectionModel.value.count} 笔(Transections))',
+                          style: GoogleFonts.poppins(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w400
                           ),
-                          for (
-                          int index = 0;
-                          index <
-                              controller
-                                  .transectionModel
-                                  .value
-                                  .results!
-                                  .length;
-                          index++
-                          )
-                            if (controller.transectionModel.value.results![index].chatId!.contains(chatId ?? ''))
-                              TableRow(
-                                children: [
-                                  TableCell(
-                                    child: Obx(
-                                          () => Text(
-                                        '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse("${controller.transectionModel.value.results?[index].time}"))}',
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                  ),
-                                  TableCell(
-                                    child: Obx(() {
-                                      double rat =
-                                          controller.transectionModel.value.results?[index].rate ?? 0;
-                                      double amout = controller.transectionModel.value.results?[index].amount ?? 1;
-                                      return Text(
-                                        '${controller.transectionModel.value.results?[index].amount}/${controller.transectionModel.value.results?[index].rate} = ${(amout / rat).toStringAsFixed(2)}',
-                                        textAlign: TextAlign.center,
-                                      );
-                                    }),
-                                  ),
-                                  TableCell(
-                                    child: Obx(
-                                          () => Text(
-                                        '${controller.transectionModel.value.results?[index].repliedBy}',
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                  ),
-                                  TableCell(
-                                    child: Obx(
-                                          () => Text(
-                                        '${controller.transectionModel.value.results?[index].operatorName}',
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                        ),
+                      ),
+                      SizedBox(height: 10),
+
+                      Obx(
+                            () =>
+                        controller.transectionModel.value.results != null
+                            ? Table(
+                          border: TableBorder.all(),
+                          columnWidths: const {
+                            0: FlexColumnWidth(),
+                            1: FlexColumnWidth(),
+                            2: FlexColumnWidth(),
+                          },
+                          children: [
+                            controller.transectionModel.value.results!.isNotEmpty
+                                ? TableRow(
+                              decoration: BoxDecoration(
+                                color: Colors.grey[200],
                               ),
-                        ],
-                      )
-                          : Text('No data found'),
-                    ),
+                              children: [
+                                TableCell(
+                                  child: Text(
+                                    '时间(time)',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Text(
+                                    '金额(Amount)',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Text(
+                                    '回复人(Reply)',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Text(
+                                    '操作人(Operator)',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ],
+                            )
+                                : TableRow(
+                              decoration: BoxDecoration(
+                                color: Colors.grey[200],
+                              ),
+                              children: [
+                                TableCell(
+                                  child: Text(
+                                    'No data',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            for (
+                            int index = 0;
+                            index <
+                                controller
+                                    .transectionModel
+                                    .value
+                                    .results!
+                                    .length;
+                            index++
+                            )
+                              if (controller.transectionModel.value.results![index].chatId!.contains(chatId ?? ''))
+                                TableRow(
+                                  children: [
+                                    TableCell(
+                                      child: Obx(
+                                            () => Text(
+                                          '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse("${controller.transectionModel.value.results?[index].time}"))}',
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ),
+                                    TableCell(
+                                      child: Obx(() {
+                                        double rat =
+                                            controller.transectionModel.value.results?[index].rate ?? 0;
+                                        double amout = controller.transectionModel.value.results?[index].amount ?? 1;
+                                        return Text(
+                                          '${controller.transectionModel.value.results?[index].amount}/${controller.transectionModel.value.results?[index].rate} = ${(amout / rat).toStringAsFixed(2)}',
+                                          textAlign: TextAlign.center,
+                                        );
+                                      }),
+                                    ),
+                                    TableCell(
+                                      child: Obx(
+                                            () => Text(
+                                          '${controller.transectionModel.value.results?[index].repliedBy}',
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ),
+                                    TableCell(
+                                      child: Obx(
+                                            () => Text(
+                                          '${controller.transectionModel.value.results?[index].operatorName}',
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                          ],
+                        )
+                            : Text('No data found'),
+                      ),
 
 
 
-                  ],
+                    ],
+                  ),
                 ),
               ),
 
@@ -335,143 +351,146 @@ class Home extends StatelessWidget {
 
 
 
-              Container(
+              Material(
+                elevation: 2,
+                child: Container(
+                padding: EdgeInsets.only(bottom: 8,left: 8,right: 8),
 
-
-                decoration: BoxDecoration(
-                  border: Border(
-                    top: BorderSide( // This adds the upper border
-                      color: Colors.blueAccent,
-                      width: 5,
+                  decoration: BoxDecoration(
+                    border: Border(
+                      top: BorderSide( // This adds the upper border
+                        color: Colors.blueAccent,
+                        width: 5,
+                      ),
                     ),
                   ),
-                ),
 
 
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
 
-                    SizedBox(height: 10),
+                      SizedBox(height: 10),
 
-                    Text('下发(Issue)(笔(Pen))', style: GoogleFonts.poppins(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400
-                    ),),
-                    SizedBox(height: 10),
+                      Text('下发(Issue)(笔(Pen))', style: GoogleFonts.poppins(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400
+                      ),),
+                      SizedBox(height: 10),
 
-                    Obx(
-                          () =>
-                      controller.issueModel.value.results != null
-                          ? Table(
-                        border: TableBorder.all(),
-                        columnWidths: const {
-                          0: FlexColumnWidth(),
-                          1: FlexColumnWidth(),
-                          2: FlexColumnWidth(),
-                        },
-                        children: [
-                          controller.issueModel.value.results!.isNotEmpty
-                              ? TableRow(
-                            decoration: BoxDecoration(
-                              color: Colors.grey[200],
+                      Obx(
+                            () =>
+                        controller.issueModel.value.results != null
+                            ? Table(
+                          border: TableBorder.all(),
+                          columnWidths: const {
+                            0: FlexColumnWidth(),
+                            1: FlexColumnWidth(),
+                            2: FlexColumnWidth(),
+                          },
+                          children: [
+                            controller.issueModel.value.results!.isNotEmpty
+                                ? TableRow(
+                              decoration: BoxDecoration(
+                                color: Colors.grey[200],
+                              ),
+                              children: [
+                                TableCell(
+                                  child: Text(
+                                    '时间(time)',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Text(
+                                    '金额(Amount)',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Text(
+                                    '回复人(Reply)',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Text(
+                                    '操作人(Operator)',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ],
+                            )
+                                : TableRow(
+                              decoration: BoxDecoration(
+                                color: Colors.grey[200],
+                              ),
+                              children: [
+                                TableCell(
+                                  child: Text(
+                                    'No data',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ],
                             ),
-                            children: [
-                              TableCell(
-                                child: Text(
-                                  '时间(time)',
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                              TableCell(
-                                child: Text(
-                                  '金额(Amount)',
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                              TableCell(
-                                child: Text(
-                                  '回复人(Reply)',
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                              TableCell(
-                                child: Text(
-                                  '操作人(Operator)',
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ],
-                          )
-                              : TableRow(
-                            decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                            ),
-                            children: [
-                              TableCell(
-                                child: Text(
-                                  'No data',
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ],
-                          ),
-                          for (
-                          int index = 0;
-                          index < controller.issueModel.value.results!.length;
-                          index++
-                          )
-                            if (controller
-                                .issueModel
-                                .value
-                                .results![index]
-                                .chatId!
-                                .contains(chatId ?? ''))
-                              TableRow(
-                                children: [
-                                  TableCell(
-                                    child: Obx(
-                                          () => Text(
-                                        '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse("${controller.issueModel.value.results?[index].time}"))}',
-                                        textAlign: TextAlign.center,
+                            for (
+                            int index = 0;
+                            index < controller.issueModel.value.results!.length;
+                            index++
+                            )
+                              if (controller
+                                  .issueModel
+                                  .value
+                                  .results![index]
+                                  .chatId!
+                                  .contains(chatId ?? ''))
+                                TableRow(
+                                  children: [
+                                    TableCell(
+                                      child: Obx(
+                                            () => Text(
+                                          '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse("${controller.issueModel.value.results?[index].time}"))}',
+                                          textAlign: TextAlign.center,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  TableCell(
-                                    child: Obx(() {
-                                      double amount =
-                                          controller.issueModel.value.results?[index].amount ?? 0;
-                                      return Text(
-                                        '$amount',
-                                        textAlign: TextAlign.center,
-                                      );
-                                    }),
-                                  ),
-                                  TableCell(
-                                    child: Obx(
-                                          () => Text(
-                                        '${controller.issueModel.value.results?[index].reply}',
-                                        textAlign: TextAlign.center,
+                                    TableCell(
+                                      child: Obx(() {
+                                        double amount =
+                                            controller.issueModel.value.results?[index].amount ?? 0;
+                                        return Text(
+                                          '$amount',
+                                          textAlign: TextAlign.center,
+                                        );
+                                      }),
+                                    ),
+                                    TableCell(
+                                      child: Obx(
+                                            () => Text(
+                                          '${controller.issueModel.value.results?[index].reply}',
+                                          textAlign: TextAlign.center,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  TableCell(
-                                    child: Obx(
-                                          () => Text(
-                                        '${controller.issueModel.value.results?[index].operatorName}',
-                                        textAlign: TextAlign.center,
+                                    TableCell(
+                                      child: Obx(
+                                            () => Text(
+                                          '${controller.issueModel.value.results?[index].operatorName}',
+                                          textAlign: TextAlign.center,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                        ],
-                      )
-                          : Text('No data found'),
-                    ),
+                                  ],
+                                ),
+                          ],
+                        )
+                            : Text('No data found'),
+                      ),
 
 
-                  ],
+                    ],
+                  ),
                 ),
               ),
 
