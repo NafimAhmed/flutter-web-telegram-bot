@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,6 +9,29 @@ import 'package:untitled/controller.dart';
 
 class Home extends StatelessWidget {
   final HomeController controller = Get.put(HomeController());
+
+
+
+
+
+  String formatDateTime(String isoDateTime) {
+    DateTime dateTime = DateTime.parse(isoDateTime);
+    String formatted = "${dateTime.year.toString().padLeft(4, '0')}-"
+        "${dateTime.month.toString().padLeft(2, '0')}-"
+        "${dateTime.day.toString().padLeft(2, '0')}-"
+        "${dateTime.hour.toString().padLeft(2, '0')}:"
+        "${dateTime.minute.toString().padLeft(2, '0')}";
+    return formatted;
+  }
+
+
+
+
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +45,16 @@ class Home extends StatelessWidget {
     controller.issueData();
 
     return Scaffold(
-      appBar: AppBar(title: Text("横断面细节(Transection Detail)")),
+      appBar: AppBar(
+          title: Obx(()=>Text('${formatDateTime('${controller.transectionModel.value.results?.first.time}')}  ----  ${formatDateTime('${controller.transectionModel.value.results?.last.time}')}',style: GoogleFonts.poppins(
+            fontSize: 16,
+            color: Colors.grey
+          ),),)
+
+
+          //Text("横断面细节(Transection Detail)"),
+
+      ),
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
@@ -70,9 +104,27 @@ class Home extends StatelessWidget {
                             ),
                           ),
                           Obx(
-                            () => Text(
-                              '应下发(Should be issued): ${controller.summeryModel.value.results?.notIssuedMoney} || ${(controller.summeryModel.value.results?.notIssuedCrypto)?.toStringAsFixed(2)} USDT',
-                            ),
+                            () {
+
+
+                              double ntissudamt= controller.summeryModel.value.results?.notIssuedMoney??0;
+                              double issudamt= controller.summeryModel.value.results?.totalIssuedMoney??0;
+                              double ntissudUSDT= controller.summeryModel.value.results?.notIssuedCrypto??0;
+                              double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
+
+                              return   Text(
+                                '应下发(Should be issued): ${ntissudamt+issudamt} || ${(ntissudUSDT+issudamtUSDT)?.toStringAsFixed(2)} USDT',
+                              );
+                            }
+
+
+
+
+
+
+
+
+
                           ),
                           Obx(
                             () => Text(
@@ -93,7 +145,7 @@ class Home extends StatelessWidget {
 
 
                                   return Text(
-                                    '未下发(Not issued): ${(ntissudamt-issudamt).toStringAsFixed(2)} || ${(ntissudUSDT-issudamtUSDT)?.toStringAsFixed(2)} USDT',
+                                    '未下发(Not issued): ${(ntissudamt).toStringAsFixed(2)} || ${(ntissudUSDT)?.toStringAsFixed(2)} USDT',
                                   );
                                 }
                           ),
@@ -102,6 +154,10 @@ class Home extends StatelessWidget {
                       ),
                     ),
                   ),
+
+
+
+
 
                   ExpantionWidget(
                     topmargin: 0,
@@ -112,7 +168,8 @@ class Home extends StatelessWidget {
                     maxWidth: Get.width / 2.1,
                     child: Column(
                       children: [
-                        Table(
+
+                        Obx(()=> controller.transectionModel.value.results != null?Table(
                           border: TableBorder.all(),
                           columnWidths: const {
                             0: FlexColumnWidth(),
@@ -149,36 +206,82 @@ class Home extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            TableRow(
-                              children: [
-                                TableCell(child: Text('')),
-                                TableCell(child:  Obx(
-                                      () => Text(
-                                    '${controller.summeryModel.value.results?.totalTransactions}',
-                                  ),
-                                ),),
-                                TableCell(child: Obx(
-                                      () => Text(
-                                    '${(controller.summeryModel.value.results?.totalIssuedUsdt)?.toStringAsFixed(2)}',
-                                  ),
-                                ),),
-                                TableCell(child:   Obx(
-                                        () {
-
-                                      double ntissudUSDT= controller.summeryModel.value.results?.notIssuedCrypto??0;
-                                      double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
-
-                                      return Text(
-                                        '${(ntissudUSDT-issudamtUSDT).toStringAsFixed(2)}',
-                                      );
-                                    }
-                                ),),
 
 
-                              ],
-                            ),
+
+
+
+                            for (
+                            int index = 0;
+                            index <
+                                controller
+                                    .transectionModel
+                                    .value
+                                    .results!
+                                    .length;
+                            index++
+                            )
+                              if (controller.transectionModel.value.results![index].chatId!.contains(chatId ?? '')&&controller.transectionModel.value.results![index].repliedBy!='')
+
+
+                                TableRow(
+                                  children: [
+                                    TableCell(child: Text('${controller.transectionModel.value.results?[index].repliedBy}')),
+
+
+
+                                    TableCell(child:  Obx(
+                                          () {
+
+                                            double replyamount= double.parse('${controller.transectionModel.value.results?[index].amount}');
+                                            double replyRate= double.parse('${controller.transectionModel.value.results?[index].rate}');
+                                            double replyfee= double.parse('${controller.summeryModel.value.results?.rate}');
+                                            double replyDeductedAmount=replyamount*(1-replyfee/100) ;
+                                            double replyUSDT=replyDeductedAmount/replyRate ;
+
+                                          return Text(
+                                            '${replyDeductedAmount}|${replyUSDT}',
+                                            textAlign: TextAlign.center,
+                                          );
+                                          }
+
+
+
+                                              ,
+                                    ),),
+                                    TableCell(child: Obx(
+                                          () => Text(
+                                        '${(controller.summeryModel.value.results?.totalIssuedUsdt)?.toStringAsFixed(2)}',
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),),
+                                    TableCell(child:   Obx(
+                                            () {
+
+                                          double ntissudUSDT= controller.summeryModel.value.results?.notIssuedCrypto??0;
+                                          double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
+
+                                          return Text('0',
+                                            textAlign: TextAlign.center,
+                                            //'${(ntissudUSDT).toStringAsFixed(2)}',
+
+                                          );
+                                        }
+                                    ),),
+
+
+                                  ],
+                                ),
+
+
+
+
                           ],
-                        ),
+                        ):Text('No data available'))
+
+
+
+                        ,
                       ],
                     ),
                   ),
