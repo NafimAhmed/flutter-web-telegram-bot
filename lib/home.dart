@@ -691,10 +691,10 @@ class Home extends StatelessWidget {
 
                           for (
                           int index = 0;
-                          index < controller.issueModel.value.results!.length;
+                          index < controller.transectionModel.value.results!.length;
                           index++
                           )
-                            if (controller.issueModel.value.results![index].chatId!.contains(chatId ?? '')&&controller.issueModel.value.results?[index].reply!='')
+                            if (controller.transectionModel.value.results![index].chatId!.contains(chatId ?? '')&&controller.transectionModel.value.results?[index].repliedBy!='')
 
 
 
@@ -702,32 +702,68 @@ class Home extends StatelessWidget {
                                 children: [
                                   TableCell(child: Obx(
                                         () => Text(
-                                      '${controller.issueModel.value.results?[index].reply}',
+                                      '${controller.transectionModel.value.results![index].repliedBy}',
                                       textAlign: TextAlign.center,
                                     ),
                                   ),),
                                   TableCell(
                                     child: Obx(
                                           () => Text(
-                                        '${controller.issueModel.value.results?[index].amount}',
+                                        '${controller.transectionModel.value.results![index].amount}',
                                         textAlign: TextAlign.center,
                                       ),
                                     ),
                                   ),
                                   TableCell(
                                     child: Obx(
-                                          () => Text(
-                                        '${(controller.issueModel.value.results?[index].amount)?.toStringAsFixed(2)}',
-                                        textAlign: TextAlign.center,
-                                      ),
+                                          () {
+
+                                            double rplyTraAmount=double.parse('${controller.transectionModel.value.results![index].amount}');
+                                            double replyfee= double.parse('${controller.summeryModel.value.results?.rate}');
+                                            double replyDeductedAmount=rplyTraAmount*(1-replyfee/100) ;
+
+
+
+                                          return   Text(
+                                            '${(replyDeductedAmount)?.toStringAsFixed(2)}',
+                                            textAlign: TextAlign.center,
+                                          );
+
+
+                                          }
+
+
+                                            ,
+
+
+
+
                                     ),
                                   ),
                                   TableCell(
                                     child: Obx(
-                                          () => Text(
-                                        '${(controller.issueModel.value.results?[index].amount)?.toStringAsFixed(2)}',
-                                        textAlign: TextAlign.center,
-                                      ),
+                                          () {
+
+                                            double replyamount= double.parse('${controller.transectionModel.value.results?[index].amount}');
+                                            double replyRate= double.parse('${controller.transectionModel.value.results?[index].rate}');
+                                            double replyfee= double.parse('${controller.summeryModel.value.results?.rate}');
+                                            double replyDeductedAmount=replyamount*(1-replyfee/100) ;
+                                            double replyUSDT=replyDeductedAmount/replyRate ;
+
+                                            return Text(
+                                              '${(replyUSDT)?.toStringAsFixed(2)}',
+                                              textAlign: TextAlign.center,
+                                            );
+
+                                          }
+
+
+
+                                          ,
+
+
+
+
                                     ),
                                   ),
                                 ],
