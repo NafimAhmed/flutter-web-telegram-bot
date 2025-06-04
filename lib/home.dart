@@ -113,9 +113,12 @@ class Home extends StatelessWidget {
                               double issudamt= controller.summeryModel.value.results?.totalIssuedMoney??0;
                               double ntissudUSDT= controller.summeryModel.value.results?.notIssuedCrypto??0;
                               double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
+                              double fee= controller.summeryModel.value.results?.rate??0;
+                              double exchangerate= controller.summeryModel.value.results?.exchangeRate??1;
+                              double totalShouldBeIssuedAmount= (ntissudamt+issudamt)*(1-fee/100);
 
                               return   Text(
-                                '应下发(Should be issued): ${ntissudamt+issudamt} || ${(ntissudUSDT+issudamtUSDT)?.toStringAsFixed(2)} USDT',
+                                '应下发(Should be issued): ${totalShouldBeIssuedAmount} || ${(totalShouldBeIssuedAmount/exchangerate)?.toStringAsFixed(2)} USDT',
                               );
                             }
 
@@ -129,9 +132,27 @@ class Home extends StatelessWidget {
 
                           ),
                           Obx(
-                            () => Text(
-                              '已下发(total Issued): ${controller.summeryModel.value.results?.totalIssuedMoney} || ${(controller.summeryModel.value.results?.totalIssuedUsdt)?.toStringAsFixed(2)} USDT',
-                            ),
+                            () {
+
+                              double ntissudamt= controller.summeryModel.value.results?.notIssuedMoney??0;
+                              double issudamt= controller.summeryModel.value.results?.totalIssuedMoney??0;
+                              double ntissudUSDT= controller.summeryModel.value.results?.notIssuedCrypto??0;
+                              double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
+                              double fee= controller.summeryModel.value.results?.rate??0;
+                              double exchangerate= controller.summeryModel.value.results?.exchangeRate??1;
+                              double totalIssuedAmount= (issudamt)*(1-fee/100);
+
+
+                              return   Text(
+                                '已下发(total Issued): ${controller.summeryModel.value.results?.totalIssuedMoney} || ${(controller.summeryModel.value.results?.totalIssuedUsdt)?.toStringAsFixed(2)} USDT',
+                              );
+                            }
+
+
+
+
+
+
                           ),
 
 
@@ -144,10 +165,18 @@ class Home extends StatelessWidget {
                                   double ntissudUSDT= controller.summeryModel.value.results?.notIssuedCrypto??0;
                                   double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
 
+                                  // double ntissudamt= controller.summeryModel.value.results?.notIssuedMoney??0;
+                                  // double issudamt= controller.summeryModel.value.results?.totalIssuedMoney??0;
+                                  // double ntissudUSDT= controller.summeryModel.value.results?.notIssuedCrypto??0;
+                                  // double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
+                                  double fee= controller.summeryModel.value.results?.rate??0;
+                                  double exchangerate= controller.summeryModel.value.results?.exchangeRate??1;
+                                  double totalShouldBeIssuedAmount= (ntissudamt+issudamt)*(1-fee/100);
+
 
 
                                   return Text(
-                                    '未下发(Not issued): ${(ntissudamt).toStringAsFixed(2)} || ${(ntissudUSDT)?.toStringAsFixed(2)} USDT',
+                                    '未下发(Not issued): ${(totalShouldBeIssuedAmount-issudamt).toStringAsFixed(2)} || ${((totalShouldBeIssuedAmount-issudamt)/exchangerate)?.toStringAsFixed(2)} USDT',
                                   );
                                 }
                           ),
@@ -846,10 +875,29 @@ class Home extends StatelessWidget {
                                   ),
                                   TableCell(
                                     child: Obx(
-                                          () => Text(
-                                        '${(controller.operatorSummery.value.results?[index].summary?.totalDepositsUsdt)?.toStringAsFixed(2)}',
-                                        textAlign: TextAlign.center,
-                                      ),
+                                          () {
+
+                                            double totalDiposit=controller.operatorSummery.value.results?[index].summary?.totalDeposits??0;
+                                            double fee= controller.summeryModel.value.results?.rate??0;
+                                            double exchangerate= controller.summeryModel.value.results?.exchangeRate??1;
+                                            double convertedUSDT=(totalDiposit*(1-fee/100))/exchangerate;
+
+
+
+
+                                            return Text(
+                                              '${(convertedUSDT)?.toStringAsFixed(2)}',
+                                              textAlign: TextAlign.center,
+                                            );
+
+                                          }
+
+
+                                              ,
+
+
+
+
                                     ),
                                   ),
                                 ],

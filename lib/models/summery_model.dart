@@ -33,7 +33,7 @@ class SummeryModel {
 }
 
 class Results {
-  int? exchangeRate;
+  double? exchangeRate;
   double? notIssuedCrypto;
   double? notIssuedMoney;
   double? rate;
