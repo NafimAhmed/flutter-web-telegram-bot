@@ -43,6 +43,7 @@ class Home extends StatelessWidget {
     controller.transectionData();
     controller.transectionSummeryData();
     controller.issueData();
+    controller.depositOperatorClassification();
 
     return Scaffold(
       appBar: AppBar(
@@ -792,8 +793,7 @@ class Home extends StatelessWidget {
 
 
 
-
-                        Table(
+                        Obx(()=>controller.operatorSummery.value.results!=null?Table(
                           border: TableBorder.all(),
                           columnWidths: const {
                             0: FlexColumnWidth(),
@@ -824,29 +824,40 @@ class Home extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            TableRow(
-                              children: [
-                                TableCell(child: Text('')),
-                                TableCell(
-                                  child: Obx(
-                                        () => Text(
-                                      '${controller.summeryModel.value.results?.totalTransactions}',
-                                      textAlign: TextAlign.center,
+
+
+
+                            for (
+                            int index = 0;
+                            index < controller.operatorSummery.value.results!.length;
+                            index++
+                            )
+                              TableRow(
+                                children: [
+                                  TableCell(child: Text('${controller.operatorSummery.value.results?[index].operatorName}')),
+                                  TableCell(
+                                    child: Obx(
+                                          () => Text(
+                                        '${controller.operatorSummery.value.results?[index].summary?.totalDeposits}',
+                                        textAlign: TextAlign.center,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                TableCell(
-                                  child: Obx(
-                                        () => Text(
-                                      '${(controller.summeryModel.value.results?.totalTransactionsCripto)?.toStringAsFixed(2)}',
-                                      textAlign: TextAlign.center,
+                                  TableCell(
+                                    child: Obx(
+                                          () => Text(
+                                        '${(controller.operatorSummery.value.results?[index].summary?.totalDepositsUsdt)?.toStringAsFixed(2)}',
+                                        textAlign: TextAlign.center,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
+                                ],
+                              ),
                           ],
-                        ),
+                        ):Text('No data'))
+
+
+                        ,
                       ],
                     ),
                   ),
@@ -954,7 +965,7 @@ class Home extends StatelessWidget {
 
                   Obx(()=>controller.issueModel.value.results != null
 
-                      // ||controller.issueModel.value.results!.length>0
+                  // ||controller.issueModel.value.results!.length>0
 
 
                       ?
@@ -1060,11 +1071,11 @@ class Home extends StatelessWidget {
                   ):
 
 
-                    ExpantionWidget(
-                      title: Text('Category of people who send replies'),
-                      maxWidth: Get.width / 2.2,
-                      child: Column(children: [Text("No Data is available")]),
-                    ),
+                  ExpantionWidget(
+                    title: Text('Category of people who send replies'),
+                    maxWidth: Get.width / 2.2,
+                    child: Column(children: [Text("No Data is available")]),
+                  ),
 
 
                   )
