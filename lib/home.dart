@@ -718,22 +718,22 @@ class Home extends StatelessWidget {
                                     child: Obx(
                                           () {
 
-                                            double rplyTraAmount=double.parse('${controller.transectionModel.value.results![index].amount}');
-                                            double replyfee= double.parse('${controller.summeryModel.value.results?.rate}');
-                                            double replyDeductedAmount=rplyTraAmount*(1-replyfee/100) ;
+                                        double rplyTraAmount=double.parse('${controller.transectionModel.value.results![index].amount}');
+                                        double replyfee= double.parse('${controller.summeryModel.value.results?.rate}');
+                                        double replyDeductedAmount=rplyTraAmount*(1-replyfee/100) ;
 
 
 
-                                          return   Text(
-                                            '${(replyDeductedAmount)?.toStringAsFixed(2)}',
-                                            textAlign: TextAlign.center,
-                                          );
+                                        return   Text(
+                                          '${(replyDeductedAmount)?.toStringAsFixed(2)}',
+                                          textAlign: TextAlign.center,
+                                        );
 
 
-                                          }
+                                      }
 
 
-                                            ,
+                                      ,
 
 
 
@@ -744,22 +744,22 @@ class Home extends StatelessWidget {
                                     child: Obx(
                                           () {
 
-                                            double replyamount= double.parse('${controller.transectionModel.value.results?[index].amount}');
-                                            double replyRate= double.parse('${controller.transectionModel.value.results?[index].rate}');
-                                            double replyfee= double.parse('${controller.summeryModel.value.results?.rate}');
-                                            double replyDeductedAmount=replyamount*(1-replyfee/100) ;
-                                            double replyUSDT=replyDeductedAmount/replyRate ;
+                                        double replyamount= double.parse('${controller.transectionModel.value.results?[index].amount}');
+                                        double replyRate= double.parse('${controller.transectionModel.value.results?[index].rate}');
+                                        double replyfee= double.parse('${controller.summeryModel.value.results?.rate}');
+                                        double replyDeductedAmount=replyamount*(1-replyfee/100) ;
+                                        double replyUSDT=replyDeductedAmount/replyRate ;
 
-                                            return Text(
-                                              '${(replyUSDT)?.toStringAsFixed(2)}',
-                                              textAlign: TextAlign.center,
-                                            );
+                                        return Text(
+                                          '${(replyUSDT)?.toStringAsFixed(2)}',
+                                          textAlign: TextAlign.center,
+                                        );
 
-                                          }
+                                      }
 
 
 
-                                          ,
+                                      ,
 
 
 
@@ -779,6 +779,7 @@ class Home extends StatelessWidget {
                     ),
                   ),
 
+
                   ExpantionWidget(
                     title: Text('入款操作人分类(Deposit operator classification)', style: GoogleFonts.poppins(
                         fontSize: 20,
@@ -787,6 +788,11 @@ class Home extends StatelessWidget {
                     maxWidth: Get.width / 2.1,
                     child: Column(
                       children: [
+
+
+
+
+
                         Table(
                           border: TableBorder.all(),
                           columnWidths: const {
@@ -844,6 +850,10 @@ class Home extends StatelessWidget {
                       ],
                     ),
                   ),
+
+
+
+
                 ],
               ): Text('No data found'),
 
