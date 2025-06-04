@@ -44,6 +44,7 @@ class Home extends StatelessWidget {
     controller.transectionSummeryData();
     controller.issueData();
     controller.depositOperatorClassification();
+    controller.depositExchangeRateClassification();
 
     return Scaffold(
       appBar: AppBar(
@@ -896,7 +897,10 @@ class Home extends StatelessWidget {
                     maxWidth: Get.width / 2.1,
                     child: Column(
                       children: [
-                        Table(
+
+
+
+                        Obx(()=>controller.exchangeRateSummery.value.results!=null?Table(
                           border: TableBorder.all(),
                           columnWidths: const {
                             0: FlexColumnWidth(),
@@ -904,6 +908,11 @@ class Home extends StatelessWidget {
                             2: FlexColumnWidth(),
                           },
                           children: [
+
+
+
+
+
                             TableRow(
                               decoration: BoxDecoration(color: Colors.grey[200]),
                               children: [
@@ -927,36 +936,50 @@ class Home extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            TableRow(
-                              children: [
-                                TableCell(
-                                  child: Obx(
-                                    () => Text(
-                                      '${controller.summeryModel.value.results?.exchangeRate}',
-                                      textAlign: TextAlign.center,
+
+
+
+                            for (
+                            int index = 0;
+                            index < controller.exchangeRateSummery.value.results!.length;
+                            index++
+                            )
+
+
+
+
+
+                              TableRow(
+                                children: [
+                                  TableCell(
+                                    child: Obx(
+                                          () => Text(
+                                        '${controller.exchangeRateSummery.value.results?[index].exchangeRate}',
+                                        textAlign: TextAlign.center,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                TableCell(
-                                  child: Obx(
-                                    () => Text(
-                                      '${controller.summeryModel.value.results?.totalTransactions}',
-                                      textAlign: TextAlign.center,
+                                  TableCell(
+                                    child: Obx(
+                                          () => Text(
+                                        '${controller.exchangeRateSummery.value.results?[index].summary?.totalDeposits}',
+                                        textAlign: TextAlign.center,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                TableCell(
-                                  child: Obx(
-                                    () => Text(
-                                      '${(controller.summeryModel.value.results?.totalTransactionsCripto)?.toStringAsFixed(2)}',
-                                      textAlign: TextAlign.center,
+                                  TableCell(
+                                    child: Obx(
+                                          () => Text(
+                                        '${(controller.exchangeRateSummery.value.results?[index].summary?.totalDepositsUsdt)?.toStringAsFixed(2)}',
+                                        textAlign: TextAlign.center,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
+                                ],
+                              ),
                           ],
-                        ),
+                        ):Text('No data'))
+                        ,
                       ],
                     ),
                   ),

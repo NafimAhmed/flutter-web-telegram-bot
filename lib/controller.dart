@@ -8,6 +8,7 @@ import 'package:untitled/models/OperatorSummery.dart';
 import 'package:untitled/models/issue_model.dart';
 import 'package:untitled/models/summery_model.dart';
 
+import 'models/exchangerate_summery.dart';
 import 'models/tramsection_model.dart';
 
 class HomeController extends GetxController{
@@ -17,6 +18,7 @@ class HomeController extends GetxController{
   Rx<IssueModel> issueModel=IssueModel().obs;
   Rx<SummeryModel> summeryModel=SummeryModel().obs;
   Rx<OperatorSummery> operatorSummery=OperatorSummery().obs;
+  Rx<ExchangeRateSummery> exchangeRateSummery=ExchangeRateSummery().obs;
   RxBool respondentTotalCategoryIsExpanded=false.obs;
   RxDouble conversion=0.00.obs;
 
@@ -169,6 +171,45 @@ class HomeController extends GetxController{
     if(response.statusCode==200||response.statusCode==200){
 
       operatorSummery.value=operatorSummeryFromJson(response.body);
+
+    }
+
+
+
+
+
+
+  }
+
+
+
+
+
+  Future<void> depositExchangeRateClassification() async {
+
+    const apiUrl = 'http://156.245.198.71:8080/api/exchange_rate_summary';
+    final uri = Uri.parse(apiUrl);
+
+
+
+    debugPrint('[fetchTransactions] Calling API: $apiUrl');
+    final response = await http.get(
+      uri,
+      headers: {
+        'Content-Type': 'application/json',
+        // Add other headers if your API requires them
+      },
+    );
+
+
+
+
+    debugPrint('+++++++++++++++++++++depositExchangeRateClassification Status: ${response.statusCode}++++++++++++++++++++++++++');
+    debugPrint('+++++++++++++++++++++++++++depositExchangeRateClassification Response: ${response.body}++++++++++++++++++++++++');
+
+    if(response.statusCode==200||response.statusCode==200){
+
+      exchangeRateSummery.value=exchangeRateSummeryFromJson(response.body);
 
     }
 
