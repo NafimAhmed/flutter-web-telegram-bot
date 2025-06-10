@@ -2,6 +2,7 @@
 
 
 
+
 // To parse this JSON data, do
 //
 //     final summeryModel = summeryModelFromJson(jsonString);
@@ -33,49 +34,77 @@ class SummeryModel {
 }
 
 class Results {
+  String? chatId;
   double? exchangeRate;
-  double? notIssuedCrypto;
-  double? notIssuedMoney;
+  bool? isSpecificChat;
+  double? netNotIssuedCrypto;
+  double? netNotIssuedMoney;
   double? rate;
+  double? removedDepositMoney;
+  double? removedDepositUsdt;
+  double? removedIssueMoney;
+  double? removedIssueUsdt;
   double? totalIssued;
   double? totalIssuedMoney;
   double? totalIssuedUsdt;
   double? totalTransactions;
-  double? totalTransactionsCripto;
+  double? totalTransactionsAfterFee;
+  double? totalTransactionsCrypto;
 
   Results({
+    this.chatId,
     this.exchangeRate,
-    this.notIssuedCrypto,
-    this.notIssuedMoney,
+    this.isSpecificChat,
+    this.netNotIssuedCrypto,
+    this.netNotIssuedMoney,
     this.rate,
+    this.removedDepositMoney,
+    this.removedDepositUsdt,
+    this.removedIssueMoney,
+    this.removedIssueUsdt,
     this.totalIssued,
     this.totalIssuedMoney,
     this.totalIssuedUsdt,
     this.totalTransactions,
-    this.totalTransactionsCripto,
+    this.totalTransactionsAfterFee,
+    this.totalTransactionsCrypto,
   });
 
   factory Results.fromJson(Map<String, dynamic> json) => Results(
+    chatId: json["chat_id"],
     exchangeRate: json["exchangeRate"],
-    notIssuedCrypto: json["notIssuedCrypto"].toDouble(),
-    notIssuedMoney: json["notIssuedMoney"],
+    isSpecificChat: json["isSpecificChat"],
+    netNotIssuedCrypto: json["netNotIssuedCrypto"].toDouble(),
+    netNotIssuedMoney: json["netNotIssuedMoney"],
     rate: json["rate"],
+    removedDepositMoney: json["removedDepositMoney"],
+    removedDepositUsdt: json["removedDepositUSDT"],
+    removedIssueMoney: json["removedIssueMoney"],
+    removedIssueUsdt: json["removedIssueUSDT"],
     totalIssued: json["totalIssued"],
     totalIssuedMoney: json["totalIssuedMoney"],
     totalIssuedUsdt: json["totalIssuedUSDT"],
     totalTransactions: json["totalTransactions"],
-    totalTransactionsCripto: json["totalTransactionsCripto"].toDouble(),
+    totalTransactionsAfterFee: json["totalTransactionsAfterFee"],
+    totalTransactionsCrypto: json["totalTransactionsCrypto"].toDouble(),
   );
 
   Map<String, dynamic> toJson() => {
+    "chat_id": chatId,
     "exchangeRate": exchangeRate,
-    "notIssuedCrypto": notIssuedCrypto,
-    "notIssuedMoney": notIssuedMoney,
+    "isSpecificChat": isSpecificChat,
+    "netNotIssuedCrypto": netNotIssuedCrypto,
+    "netNotIssuedMoney": netNotIssuedMoney,
     "rate": rate,
+    "removedDepositMoney": removedDepositMoney,
+    "removedDepositUSDT": removedDepositUsdt,
+    "removedIssueMoney": removedIssueMoney,
+    "removedIssueUSDT": removedIssueUsdt,
     "totalIssued": totalIssued,
     "totalIssuedMoney": totalIssuedMoney,
     "totalIssuedUSDT": totalIssuedUsdt,
     "totalTransactions": totalTransactions,
-    "totalTransactionsCripto": totalTransactionsCripto,
+    "totalTransactionsAfterFee": totalTransactionsAfterFee,
+    "totalTransactionsCrypto": totalTransactionsCrypto,
   };
 }

@@ -29,9 +29,9 @@ class HomeController extends GetxController{
 
 
 
-  Future<void> transectionData() async {
+  Future<void> transectionData(String chatID) async {
 
-    const apiUrl = 'http://156.245.198.71:8080/api/transactions';
+     String apiUrl = 'http://156.245.198.71:8080/api/transactions?chat_id=$chatID';
     final uri = Uri.parse(apiUrl);
 
 
@@ -67,9 +67,9 @@ class HomeController extends GetxController{
   }
 
 
-  Future<void> transectionSummeryData() async {
+  Future<void> transectionSummeryData(String chatID) async {
 
-    const apiUrl = 'http://156.245.198.71:8080/api/summary';
+    String apiUrl = 'http://156.245.198.71:8080/api/summary?chat_id=$chatID';
     final uri = Uri.parse(apiUrl);
 
 
@@ -107,9 +107,9 @@ class HomeController extends GetxController{
 
 
 
-  Future<void> issueData() async {
+  Future<void> issueData(String chatId) async {
 
-    const apiUrl = 'http://156.245.198.71:8080/api/issued';
+    String apiUrl = 'http://156.245.198.71:8080/api/issued?chat_id=$chatId';
     final uri = Uri.parse(apiUrl);
 
 

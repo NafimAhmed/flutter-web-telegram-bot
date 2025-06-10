@@ -2,7 +2,6 @@
 
 
 
-
 // To parse this JSON data, do
 //
 //     final transectionModel = transectionModelFromJson(jsonString);
@@ -14,12 +13,14 @@ TransectionModel transectionModelFromJson(String str) => TransectionModel.fromJs
 String transectionModelToJson(TransectionModel data) => json.encode(data.toJson());
 
 class TransectionModel {
+  String? chatId;
   int? count;
   List<Result>? results;
   bool? success;
   DateTime? timestamp;
 
   TransectionModel({
+    this.chatId,
     this.count,
     this.results,
     this.success,
@@ -27,6 +28,7 @@ class TransectionModel {
   });
 
   factory TransectionModel.fromJson(Map<String, dynamic> json) => TransectionModel(
+    chatId: json["chat_id"],
     count: json["count"],
     results: List<Result>.from(json["results"].map((x) => Result.fromJson(x))),
     success: json["success"],
@@ -34,6 +36,7 @@ class TransectionModel {
   );
 
   Map<String, dynamic> toJson() => {
+    "chat_id": chatId,
     "count": count,
     "results": List<dynamic>.from(results!.map((x) => x.toJson())),
     "success": success,

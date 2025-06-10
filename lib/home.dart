@@ -40,9 +40,9 @@ class Home extends StatelessWidget {
     print('Chat ID from URL: $chatId');
 
     // If needed, you can store this in the controller or use it elsewhere.
-    controller.transectionData();
-    controller.transectionSummeryData();
-    controller.issueData();
+    controller.transectionData(chatId??'');
+    controller.transectionSummeryData(chatId??'');
+    controller.issueData(chatId??'');
     controller.depositOperatorClassification();
     controller.depositExchangeRateClassification();
 
@@ -109,9 +109,17 @@ class Home extends StatelessWidget {
                             () {
 
 
-                              double ntissudamt= controller.summeryModel.value.results?.notIssuedMoney??0;
+                              // double ntissudamt= controller.summeryModel.value.results?.notIssuedMoney??0;
+                              // double issudamt= controller.summeryModel.value.results?.totalIssuedMoney??0;
+                              // double ntissudUSDT= controller.summeryModel.value.results?.notIssuedCrypto??0;
+                              // double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
+                              // double fee= controller.summeryModel.value.results?.rate??0;
+                              // double exchangerate= controller.summeryModel.value.results?.exchangeRate??1;
+                              // double totalShouldBeIssuedAmount= (ntissudamt+issudamt)*(1-fee/100);
+
+                              double ntissudamt= controller.summeryModel.value.results?.netNotIssuedMoney??0;
                               double issudamt= controller.summeryModel.value.results?.totalIssuedMoney??0;
-                              double ntissudUSDT= controller.summeryModel.value.results?.notIssuedCrypto??0;
+                              double ntissudUSDT= controller.summeryModel.value.results?.netNotIssuedCrypto??0;
                               double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
                               double fee= controller.summeryModel.value.results?.rate??0;
                               double exchangerate= controller.summeryModel.value.results?.exchangeRate??1;
@@ -134,9 +142,17 @@ class Home extends StatelessWidget {
                           Obx(
                             () {
 
-                              double ntissudamt= controller.summeryModel.value.results?.notIssuedMoney??0;
+                              // double ntissudamt= controller.summeryModel.value.results?.notIssuedMoney??0;
+                              // double issudamt= controller.summeryModel.value.results?.totalIssuedMoney??0;
+                              // double ntissudUSDT= controller.summeryModel.value.results?.notIssuedCrypto??0;
+                              // double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
+                              // double fee= controller.summeryModel.value.results?.rate??0;
+                              // double exchangerate= controller.summeryModel.value.results?.exchangeRate??1;
+                              // double totalIssuedAmount= (issudamt)*(1-fee/100);
+
+                              double ntissudamt= controller.summeryModel.value.results?.netNotIssuedMoney??0;
                               double issudamt= controller.summeryModel.value.results?.totalIssuedMoney??0;
-                              double ntissudUSDT= controller.summeryModel.value.results?.notIssuedCrypto??0;
+                              double ntissudUSDT= controller.summeryModel.value.results?.netNotIssuedCrypto??0;
                               double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
                               double fee= controller.summeryModel.value.results?.rate??0;
                               double exchangerate= controller.summeryModel.value.results?.exchangeRate??1;
@@ -160,10 +176,18 @@ class Home extends StatelessWidget {
                                 () {
 
 
-                                  double ntissudamt= controller.summeryModel.value.results?.notIssuedMoney??0;
+                                  // double ntissudamt= controller.summeryModel.value.results?.notIssuedMoney??0;
+                                  // double issudamt= controller.summeryModel.value.results?.totalIssuedMoney??0;
+                                  // double ntissudUSDT= controller.summeryModel.value.results?.notIssuedCrypto??0;
+                                  // double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
+
+                                  double ntissudamt= controller.summeryModel.value.results?.netNotIssuedMoney??0;
                                   double issudamt= controller.summeryModel.value.results?.totalIssuedMoney??0;
-                                  double ntissudUSDT= controller.summeryModel.value.results?.notIssuedCrypto??0;
+                                  double ntissudUSDT= controller.summeryModel.value.results?.netNotIssuedCrypto??0;
                                   double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
+
+
+
 
                                   // double ntissudamt= controller.summeryModel.value.results?.notIssuedMoney??0;
                                   // double issudamt= controller.summeryModel.value.results?.totalIssuedMoney??0;
@@ -314,8 +338,11 @@ class Home extends StatelessWidget {
                                     TableCell(child:   Obx(
                                             () {
 
-                                          double ntissudUSDT= controller.summeryModel.value.results?.notIssuedCrypto??0;
-                                          double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
+                                          // double ntissudUSDT= controller.summeryModel.value.results?.notIssuedCrypto??0;
+                                          // double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
+
+                                              double ntissudUSDT= controller.summeryModel.value.results?.netNotIssuedCrypto??0;
+                                              double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
 
                                           return Text('0',
                                             textAlign: TextAlign.center,
