@@ -91,9 +91,16 @@ class Home extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Obx(
-                            () => Text(
-                              '总入款金额(Total deposit amount): ${controller.summeryModel.value.results?.totalTransactions}',
-                            ),
+                            () {
+
+                              return Text(
+                                '总入款金额(Total deposit amount): ${(controller.summeryModel.value.results?.totalTransactions)??0-(controller.summeryModel.value.results?.removedDepositMoney??0)}',
+                              );
+                    }
+
+
+
+                                ,
                           ),
                           Obx(
                             () => Text(
@@ -123,10 +130,14 @@ class Home extends StatelessWidget {
                               double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
                               double fee= controller.summeryModel.value.results?.rate??0;
                               double exchangerate= controller.summeryModel.value.results?.exchangeRate??1;
-                              double totalShouldBeIssuedAmount= (ntissudamt+issudamt)*(1-fee/100);
+                              double totalShouldBeIssuedAmount= controller.summeryModel.value.results?.totalTransactionsAfterFee??0;//(ntissudamt+issudamt)*(1-fee/100);
+                              double totalRemoveIssueAmount= controller.summeryModel.value.results?.removedIssueMoney??0;//(ntissudamt+issudamt)*(1-fee/100);
+                              double totalRemoveeIssuedCrypto= controller.summeryModel.value.results?.removedIssueUsdt??0;//(ntissudamt+issudamt)*(1-fee/100);
+
+
 
                               return   Text(
-                                '应下发(Should be issued): ${totalShouldBeIssuedAmount} || ${(totalShouldBeIssuedAmount/exchangerate)?.toStringAsFixed(2)} USDT',
+                                '应下发(Should be issued): ${totalShouldBeIssuedAmount+totalRemoveIssueAmount} || ${((totalShouldBeIssuedAmount/exchangerate)+totalRemoveeIssuedCrypto).toStringAsFixed(2)} USDT',
                               );
                             }
 
@@ -157,10 +168,12 @@ class Home extends StatelessWidget {
                               double fee= controller.summeryModel.value.results?.rate??0;
                               double exchangerate= controller.summeryModel.value.results?.exchangeRate??1;
                               double totalIssuedAmount= (issudamt)*(1-fee/100);
+                              double totalRemoveIssueAmount= controller.summeryModel.value.results?.removedIssueMoney??0;//(ntissudamt+issudamt)*(1-fee/100);
+                              double totalRemoveeIssuedCrypto= controller.summeryModel.value.results?.removedIssueUsdt??0;//(ntissudamt+issudamt)*(1-fee/100);
 
 
                               return   Text(
-                                '已下发(total Issued): ${controller.summeryModel.value.results?.totalIssuedMoney} || ${(controller.summeryModel.value.results?.totalIssuedUsdt)?.toStringAsFixed(2)} USDT',
+                                '已下发(total Issued): ${(controller.summeryModel.value.results?.totalIssuedMoney)??0-totalRemoveIssueAmount} || ${((controller.summeryModel.value.results?.totalIssuedUsdt)??0-totalRemoveeIssuedCrypto).toStringAsFixed(2)} USDT',
                               );
                             }
 
@@ -195,12 +208,14 @@ class Home extends StatelessWidget {
                                   // double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
                                   double fee= controller.summeryModel.value.results?.rate??0;
                                   double exchangerate= controller.summeryModel.value.results?.exchangeRate??1;
-                                  double totalShouldBeIssuedAmount= (ntissudamt+issudamt)*(1-fee/100);
+                                  double totalShouldBeIssuedAmount= controller.summeryModel.value.results?.totalTransactionsAfterFee??0;//(ntissudamt+issudamt)*(1-fee/100);
+                                  double totalRemoveIssueAmount= controller.summeryModel.value.results?.removedIssueMoney??0;//(ntissudamt+issudamt)*(1-fee/100);
+                                  double totalRemoveeIssuedCrypto= controller.summeryModel.value.results?.removedIssueUsdt??0;//(ntissudamt+issudamt)*(1-fee/100);
 
 
 
                                   return Text(
-                                    '未下发(Not issued): ${(totalShouldBeIssuedAmount-issudamt).toStringAsFixed(2)} || ${((totalShouldBeIssuedAmount-issudamt)/exchangerate)?.toStringAsFixed(2)} USDT',
+                                    '未下发(Not issued): ${(totalShouldBeIssuedAmount-issudamt+totalRemoveIssueAmount).toStringAsFixed(2)} || ${((totalShouldBeIssuedAmount-issudamt+totalRemoveIssueAmount)/exchangerate)?.toStringAsFixed(2)} USDT',
                                   );
                                 }
                           ),
