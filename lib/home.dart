@@ -131,13 +131,22 @@ class Home extends StatelessWidget {
                               double fee= controller.summeryModel.value.results?.rate??0;
                               double exchangerate= controller.summeryModel.value.results?.exchangeRate??1;
                               double totalShouldBeIssuedAmount= controller.summeryModel.value.results?.totalTransactionsAfterFee??0;//(ntissudamt+issudamt)*(1-fee/100);
+                              double totalShouldBeIssuedCrypto= controller.summeryModel.value.results?.totalTransactionsCrypto??0;//(ntissudamt+issudamt)*(1-fee/100);
+
                               double totalRemoveIssueAmount= controller.summeryModel.value.results?.removedIssueMoney??0;//(ntissudamt+issudamt)*(1-fee/100);
                               double totalRemoveeIssuedCrypto= controller.summeryModel.value.results?.removedIssueUsdt??0;//(ntissudamt+issudamt)*(1-fee/100);
 
 
 
+
+                              // return   Text(
+                              //   '应下发(Should be issued): ${totalShouldBeIssuedAmount+totalRemoveIssueAmount} || ${((totalShouldBeIssuedAmount/exchangerate)+totalRemoveeIssuedCrypto).toStringAsFixed(2)} USDT',
+                              // );
+
+
+
                               return   Text(
-                                '应下发(Should be issued): ${totalShouldBeIssuedAmount+totalRemoveIssueAmount} || ${((totalShouldBeIssuedAmount/exchangerate)+totalRemoveeIssuedCrypto).toStringAsFixed(2)} USDT',
+                                '应下发(Should be issued): ${(totalShouldBeIssuedCrypto*exchangerate)+totalRemoveIssueAmount} || ${((totalShouldBeIssuedCrypto)+totalRemoveeIssuedCrypto).toStringAsFixed(2)} USDT',
                               );
                             }
 
@@ -209,13 +218,21 @@ class Home extends StatelessWidget {
                                   double fee= controller.summeryModel.value.results?.rate??0;
                                   double exchangerate= controller.summeryModel.value.results?.exchangeRate??1;
                                   double totalShouldBeIssuedAmount= controller.summeryModel.value.results?.totalTransactionsAfterFee??0;//(ntissudamt+issudamt)*(1-fee/100);
+                                  double totalDepositCripto= controller.summeryModel.value.results?.totalTransactionsCrypto??0;//(ntissudamt+issudamt)*(1-fee/100);
+                                  double totalIssiedCripto= controller.summeryModel.value.results?.totalIssuedUsdt??0;//(ntissudamt+issudamt)*(1-fee/100);
                                   double totalRemoveIssueAmount= controller.summeryModel.value.results?.removedIssueMoney??0;//(ntissudamt+issudamt)*(1-fee/100);
                                   double totalRemoveeIssuedCrypto= controller.summeryModel.value.results?.removedIssueUsdt??0;//(ntissudamt+issudamt)*(1-fee/100);
 
 
 
+                                  // return Text(
+                                  //   '未下发(Not issued): ${(totalShouldBeIssuedAmount-issudamt+totalRemoveIssueAmount).toStringAsFixed(2)} || ${((totalShouldBeIssuedAmount-issudamt+totalRemoveIssueAmount)/exchangerate)?.toStringAsFixed(2)} USDT',
+                                  // );
+
+
+
                                   return Text(
-                                    '未下发(Not issued): ${(totalShouldBeIssuedAmount-issudamt+totalRemoveIssueAmount).toStringAsFixed(2)} || ${((totalShouldBeIssuedAmount-issudamt+totalRemoveIssueAmount)/exchangerate)?.toStringAsFixed(2)} USDT',
+                                    '未下发(Not issued): ${((totalDepositCripto-totalIssiedCripto+totalRemoveeIssuedCrypto)*exchangerate).toStringAsFixed(2)} || ${((totalDepositCripto-totalIssiedCripto+totalRemoveeIssuedCrypto))?.toStringAsFixed(2)} USDT',
                                   );
                                 }
                           ),
