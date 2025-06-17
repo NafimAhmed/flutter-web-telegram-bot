@@ -44,7 +44,7 @@ class Home extends StatelessWidget {
     controller.transectionSummeryData(chatId??'');
     controller.issueData(chatId??'');
     controller.depositOperatorClassification();
-    controller.depositExchangeRateClassification();
+    controller.depositExchangeRateClassification(chatId??'');
 
     return Scaffold(
       appBar: AppBar(
@@ -94,7 +94,7 @@ class Home extends StatelessWidget {
                             () {
 
                               return Text(
-                                '总入款金额(Total deposit amount): ${(controller.summeryModel.value.results?.totalTransactions)??0-(controller.summeryModel.value.results?.removedDepositMoney??0)}',
+                                '总入款金额(Total deposit amount): ${(controller.summeryModel.value.results?.statistics?.totalDepositAmount)??0-(controller.summeryModel.value.results?.removed?.deposits?.cny??0)}',
                               );
                     }
 
@@ -109,9 +109,11 @@ class Home extends StatelessWidget {
                           ),
                           Obx(
                             () => Text(
-                              '费率(Rate): ${controller.summeryModel.value.results?.rate}',
+                              '费率(Rate): ${controller.summeryModel.value.results?.feePercentage}',
                             ),
                           ),
+
+
                           Obx(
                             () {
 
@@ -124,18 +126,18 @@ class Home extends StatelessWidget {
                               // double exchangerate= controller.summeryModel.value.results?.exchangeRate??1;
                               // double totalShouldBeIssuedAmount= (ntissudamt+issudamt)*(1-fee/100);
 
-                              double ntissudamt= controller.summeryModel.value.results?.netNotIssuedMoney??0;
-                              double issudamt= controller.summeryModel.value.results?.totalIssuedMoney??0;
-                              double ntissudUSDT= controller.summeryModel.value.results?.netNotIssuedCrypto??0;
-                              double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
-                              double fee= controller.summeryModel.value.results?.rate??0;
-                              double exchangerate= controller.summeryModel.value.results?.exchangeRate??1;
-                              double totalShouldBeIssuedAmount= controller.summeryModel.value.results?.totalTransactionsAfterFee??0;//(ntissudamt+issudamt)*(1-fee/100);
-                              double totalShouldBeIssuedCrypto= controller.summeryModel.value.results?.totalTransactionsCrypto??0;//(ntissudamt+issudamt)*(1-fee/100);
-
-                              double totalRemoveIssueAmount= controller.summeryModel.value.results?.removedIssueMoney??0;//(ntissudamt+issudamt)*(1-fee/100);
-                              double totalRemoveeIssuedCrypto= controller.summeryModel.value.results?.removedIssueUsdt??0;//(ntissudamt+issudamt)*(1-fee/100);
-
+                              // double ntissudamt= controller.summeryModel.value.results?.netNotIssuedMoney??0;
+                              // double issudamt= controller.summeryModel.value.results?.totalIssuedMoney??0;
+                              // double ntissudUSDT= controller.summeryModel.value.results?.netNotIssuedCrypto??0;
+                              // double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
+                              // double fee= controller.summeryModel.value.results?.rate??0;
+                              // double exchangerate= controller.summeryModel.value.results?.exchangeRate??1;
+                              // double totalShouldBeIssuedAmount= controller.summeryModel.value.results?.totalTransactionsAfterFee??0;//(ntissudamt+issudamt)*(1-fee/100);
+                              // double totalShouldBeIssuedCrypto= controller.summeryModel.value.results?.totalTransactionsCrypto??0;//(ntissudamt+issudamt)*(1-fee/100);
+                              //
+                              // double totalRemoveIssueAmount= controller.summeryModel.value.results?.removedIssueMoney??0;//(ntissudamt+issudamt)*(1-fee/100);
+                              // double totalRemoveeIssuedCrypto= controller.summeryModel.value.results?.removedIssueUsdt??0;//(ntissudamt+issudamt)*(1-fee/100);
+                              //
 
 
 
@@ -146,7 +148,7 @@ class Home extends StatelessWidget {
 
 
                               return   Text(
-                                '应下发(Should be issued): ${(totalShouldBeIssuedCrypto*exchangerate)+totalRemoveIssueAmount} || ${((totalShouldBeIssuedCrypto)+totalRemoveeIssuedCrypto).toStringAsFixed(2)} USDT',
+                                '应下发(Should be issued): ${(controller.summeryModel.value.results?.shouldIssue?.cny)?.toStringAsFixed(2)} || ${(controller.summeryModel.value.results?.shouldIssue?.usdt)?.toStringAsFixed(2)} USDT',
                               );
                             }
 
@@ -159,6 +161,9 @@ class Home extends StatelessWidget {
 
 
                           ),
+
+
+
                           Obx(
                             () {
 
@@ -170,19 +175,19 @@ class Home extends StatelessWidget {
                               // double exchangerate= controller.summeryModel.value.results?.exchangeRate??1;
                               // double totalIssuedAmount= (issudamt)*(1-fee/100);
 
-                              double ntissudamt= controller.summeryModel.value.results?.netNotIssuedMoney??0;
-                              double issudamt= controller.summeryModel.value.results?.totalIssuedMoney??0;
-                              double ntissudUSDT= controller.summeryModel.value.results?.netNotIssuedCrypto??0;
-                              double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
-                              double fee= controller.summeryModel.value.results?.rate??0;
-                              double exchangerate= controller.summeryModel.value.results?.exchangeRate??1;
-                              double totalIssuedAmount= (issudamt)*(1-fee/100);
-                              double totalRemoveIssueAmount= controller.summeryModel.value.results?.removedIssueMoney??0;//(ntissudamt+issudamt)*(1-fee/100);
-                              double totalRemoveeIssuedCrypto= controller.summeryModel.value.results?.removedIssueUsdt??0;//(ntissudamt+issudamt)*(1-fee/100);
+                              // double ntissudamt= controller.summeryModel.value.results?.netNotIssuedMoney??0;
+                              // double issudamt= controller.summeryModel.value.results?.totalIssuedMoney??0;
+                              // double ntissudUSDT= controller.summeryModel.value.results?.netNotIssuedCrypto??0;
+                              // double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
+                              // double fee= controller.summeryModel.value.results?.rate??0;
+                              // double exchangerate= controller.summeryModel.value.results?.exchangeRate??1;
+                              // double totalIssuedAmount= (issudamt)*(1-fee/100);
+                              // double totalRemoveIssueAmount= controller.summeryModel.value.results?.removedIssueMoney??0;//(ntissudamt+issudamt)*(1-fee/100);
+                              // double totalRemoveeIssuedCrypto= controller.summeryModel.value.results?.removedIssueUsdt??0;//(ntissudamt+issudamt)*(1-fee/100);
 
 
                               return   Text(
-                                '已下发(total Issued): ${(controller.summeryModel.value.results?.totalIssuedMoney)??0-totalRemoveIssueAmount} || ${((controller.summeryModel.value.results?.totalIssuedUsdt)??0-totalRemoveeIssuedCrypto).toStringAsFixed(2)} USDT',
+                                '已下发(total Issued): ${(controller.summeryModel.value.results?.issued?.cny)??0} || ${(controller.summeryModel.value.results?.issued?.usdt)?.toStringAsFixed(2)} USDT',
                               );
                             }
 
@@ -202,27 +207,27 @@ class Home extends StatelessWidget {
                                   // double issudamt= controller.summeryModel.value.results?.totalIssuedMoney??0;
                                   // double ntissudUSDT= controller.summeryModel.value.results?.notIssuedCrypto??0;
                                   // double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
-
-                                  double ntissudamt= controller.summeryModel.value.results?.netNotIssuedMoney??0;
-                                  double issudamt= controller.summeryModel.value.results?.totalIssuedMoney??0;
-                                  double ntissudUSDT= controller.summeryModel.value.results?.netNotIssuedCrypto??0;
-                                  double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
-
-
-
-
-                                  // double ntissudamt= controller.summeryModel.value.results?.notIssuedMoney??0;
+                                  //
+                                  // double ntissudamt= controller.summeryModel.value.results?.netNotIssuedMoney??0;
                                   // double issudamt= controller.summeryModel.value.results?.totalIssuedMoney??0;
-                                  // double ntissudUSDT= controller.summeryModel.value.results?.notIssuedCrypto??0;
+                                  // double ntissudUSDT= controller.summeryModel.value.results?.netNotIssuedCrypto??0;
                                   // double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
-                                  double fee= controller.summeryModel.value.results?.rate??0;
-                                  double exchangerate= controller.summeryModel.value.results?.exchangeRate??1;
-                                  double totalShouldBeIssuedAmount= controller.summeryModel.value.results?.totalTransactionsAfterFee??0;//(ntissudamt+issudamt)*(1-fee/100);
-                                  double totalDepositCripto= controller.summeryModel.value.results?.totalTransactionsCrypto??0;//(ntissudamt+issudamt)*(1-fee/100);
-                                  double totalIssiedCripto= controller.summeryModel.value.results?.totalIssuedUsdt??0;//(ntissudamt+issudamt)*(1-fee/100);
-                                  double totalRemoveIssueAmount= controller.summeryModel.value.results?.removedIssueMoney??0;//(ntissudamt+issudamt)*(1-fee/100);
-                                  double totalRemoveeIssuedCrypto= controller.summeryModel.value.results?.removedIssueUsdt??0;//(ntissudamt+issudamt)*(1-fee/100);
-
+                                  //
+                                  //
+                                  //
+                                  //
+                                  // // double ntissudamt= controller.summeryModel.value.results?.notIssuedMoney??0;
+                                  // // double issudamt= controller.summeryModel.value.results?.totalIssuedMoney??0;
+                                  // // double ntissudUSDT= controller.summeryModel.value.results?.notIssuedCrypto??0;
+                                  // // double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
+                                  // double fee= controller.summeryModel.value.results?.rate??0;
+                                  // double exchangerate= controller.summeryModel.value.results?.exchangeRate??1;
+                                  // double totalShouldBeIssuedAmount= controller.summeryModel.value.results?.totalTransactionsAfterFee??0;//(ntissudamt+issudamt)*(1-fee/100);
+                                  // double totalDepositCripto= controller.summeryModel.value.results?.totalTransactionsCrypto??0;//(ntissudamt+issudamt)*(1-fee/100);
+                                  // double totalIssiedCripto= controller.summeryModel.value.results?.totalIssuedUsdt??0;//(ntissudamt+issudamt)*(1-fee/100);
+                                  // double totalRemoveIssueAmount= controller.summeryModel.value.results?.removedIssueMoney??0;//(ntissudamt+issudamt)*(1-fee/100);
+                                  // double totalRemoveeIssuedCrypto= controller.summeryModel.value.results?.removedIssueUsdt??0;//(ntissudamt+issudamt)*(1-fee/100);
+                                  //
 
 
                                   // return Text(
@@ -232,7 +237,7 @@ class Home extends StatelessWidget {
 
 
                                   return Text(
-                                    '未下发(Not issued): ${((totalDepositCripto-totalIssiedCripto+totalRemoveeIssuedCrypto)*exchangerate).toStringAsFixed(2)} || ${((totalDepositCripto-totalIssiedCripto+totalRemoveeIssuedCrypto))?.toStringAsFixed(2)} USDT',
+                                    '未下发(Not issued): ${(controller.summeryModel.value.results?.unissued?.cny)?.toStringAsFixed(2)} || ${((controller.summeryModel.value.results?.unissued?.usdt))?.toStringAsFixed(2)} USDT',
                                   );
                                 }
                           ),
@@ -323,7 +328,7 @@ class Home extends StatelessWidget {
 
                                             double replyamount= double.parse('${controller.transectionModel.value.results?[index].amount}');
                                             double replyRate= double.parse('${controller.transectionModel.value.results?[index].rate}');
-                                            double replyfee= double.parse('${controller.summeryModel.value.results?.rate}');
+                                            double replyfee= double.parse('${controller.summeryModel.value.results?.feePercentage}');
                                             double replyDeductedAmount=replyamount*(1-replyfee/100) ;
                                             double replyUSDT=replyDeductedAmount/replyRate ;
 
@@ -373,8 +378,8 @@ class Home extends StatelessWidget {
                                           // double ntissudUSDT= controller.summeryModel.value.results?.notIssuedCrypto??0;
                                           // double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
 
-                                              double ntissudUSDT= controller.summeryModel.value.results?.netNotIssuedCrypto??0;
-                                              double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
+                                              // double ntissudUSDT= controller.summeryModel.value.results?.netNotIssuedCrypto??0;
+                                              // double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
 
                                           return Text('0',
                                             textAlign: TextAlign.center,
@@ -809,7 +814,7 @@ class Home extends StatelessWidget {
                                           () {
 
                                         double rplyTraAmount=double.parse('${controller.transectionModel.value.results![index].amount}');
-                                        double replyfee= double.parse('${controller.summeryModel.value.results?.rate}');
+                                        double replyfee= double.parse('${controller.summeryModel.value.results?.feePercentage}');
                                         double replyDeductedAmount=rplyTraAmount*(1-replyfee/100) ;
 
 
@@ -836,7 +841,7 @@ class Home extends StatelessWidget {
 
                                         double replyamount= double.parse('${controller.transectionModel.value.results?[index].amount}');
                                         double replyRate= double.parse('${controller.transectionModel.value.results?[index].rate}');
-                                        double replyfee= double.parse('${controller.summeryModel.value.results?.rate}');
+                                        double replyfee= double.parse('${controller.summeryModel.value.results?.feePercentage}');
                                         double replyDeductedAmount=replyamount*(1-replyfee/100) ;
                                         double replyUSDT=replyDeductedAmount/replyRate ;
 
@@ -937,7 +942,7 @@ class Home extends StatelessWidget {
                                           () {
 
                                             double totalDiposit=controller.operatorSummery.value.results?[index].summary?.totalDeposits??0;
-                                            double fee= controller.summeryModel.value.results?.rate??0;
+                                            double fee= controller.summeryModel.value.results?.feePercentage??0;
                                             double exchangerate= controller.summeryModel.value.results?.exchangeRate??1;
                                             double convertedUSDT=(totalDiposit*(1-fee/100))/exchangerate;
 
@@ -1069,7 +1074,8 @@ class Home extends StatelessWidget {
                                   TableCell(
                                     child: Obx(
                                           () => Text(
-                                        '${controller.exchangeRateSummery.value.results?[index].summary?.totalDeposits}',
+                                        // '${controller.exchangeRateSummery.value.results?[index].summary?.totalDeposits}',
+                                        '${controller.exchangeRateSummery.value.results?[index].summary?['total_deposits_before_fee']}',
                                         textAlign: TextAlign.center,
                                       ),
                                     ),
@@ -1077,7 +1083,7 @@ class Home extends StatelessWidget {
                                   TableCell(
                                     child: Obx(
                                           () => Text(
-                                        '${(controller.exchangeRateSummery.value.results?[index].summary?.totalDepositsUsdt)?.toStringAsFixed(2)}',
+                                        '${(controller.exchangeRateSummery.value.results?[index].summary?['total_deposits_usdt'])?.toStringAsFixed(2)}',
                                         textAlign: TextAlign.center,
                                       ),
                                     ),

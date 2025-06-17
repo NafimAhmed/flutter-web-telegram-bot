@@ -185,9 +185,9 @@ class HomeController extends GetxController{
 
 
 
-  Future<void> depositExchangeRateClassification() async {
+  Future<void> depositExchangeRateClassification(String chatID) async {
 
-    const apiUrl = 'http://156.245.198.71:8080/api/exchange_rate_summary';
+    String apiUrl = 'http://156.245.198.71:8080/api/exchange_rate_summary?chat_id=$chatID';
     final uri = Uri.parse(apiUrl);
 
 
