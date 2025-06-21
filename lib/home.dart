@@ -43,7 +43,7 @@ class Home extends StatelessWidget {
     controller.transectionData(chatId??'');
     controller.transectionSummeryData(chatId??'');
     controller.issueData(chatId??'');
-    controller.depositOperatorClassification();
+    controller.depositOperatorClassification(chatId??'');
     controller.depositExchangeRateClassification(chatId??'');
 
     return Scaffold(
@@ -59,6 +59,7 @@ class Home extends StatelessWidget {
       ),
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 16),
+
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -333,7 +334,7 @@ class Home extends StatelessWidget {
                                             double replyUSDT=replyDeductedAmount/replyRate ;
 
                                           return Text(
-                                            '${replyDeductedAmount}|${replyUSDT}',
+                                            '${replyDeductedAmount.toStringAsFixed(2)}|${replyUSDT.toStringAsFixed(2)}',
                                             textAlign: TextAlign.center,
                                           );
                                           }
@@ -372,22 +373,25 @@ class Home extends StatelessWidget {
 
                                               ,
                                     ),),
-                                    TableCell(child:   Obx(
-                                            () {
+                                    TableCell(child:   Text('')
+                                    // Obx(
+                                    //         () {
+                                    //
+                                    //       // double ntissudUSDT= controller.summeryModel.value.results?.notIssuedCrypto??0;
+                                    //       // double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
+                                    //
+                                    //           // double ntissudUSDT= controller.summeryModel.value.results?.netNotIssuedCrypto??0;
+                                    //           // double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
+                                    //
+                                    //       return Text('0',
+                                    //         textAlign: TextAlign.center,
+                                    //         //'${(ntissudUSDT).toStringAsFixed(2)}',
+                                    //
+                                    //       );
+                                    //     }
+                                    // ),
 
-                                          // double ntissudUSDT= controller.summeryModel.value.results?.notIssuedCrypto??0;
-                                          // double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
-
-                                              // double ntissudUSDT= controller.summeryModel.value.results?.netNotIssuedCrypto??0;
-                                              // double issudamtUSDT= controller.summeryModel.value.results?.totalIssuedUsdt??0;
-
-                                          return Text('0',
-                                            textAlign: TextAlign.center,
-                                            //'${(ntissudUSDT).toStringAsFixed(2)}',
-
-                                          );
-                                        }
-                                    ),),
+                                    ),
 
 
                                   ],
